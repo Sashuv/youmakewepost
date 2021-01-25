@@ -1,0 +1,165 @@
+<%- include('header') -%>
+
+<div id="popup" class="overlay">
+  <div class="popup">
+    <h2>Here i am</h2>
+    <a class="close" href="#">&times;</a>
+    <div class="content">
+      <div class="loader">Loading</div>
+      Thank to pop me out of that button, but now i'm done so you can close this window.
+    </div>
+  </div>
+</div>
+
+<!-- !GET STARTED! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">  
+  <div class="card step-progress">
+    <div class="step-slider">
+      <div data-id="step1" class="step-slider-item"></div>
+      <div data-id="step2" class="step-slider-item"></div>
+      <div data-id="step3" class="step-slider-item"></div>
+    </div>
+    <div class="step-content">
+      <div id="stepLast" class="step-content-body">
+        <h4>Step 4: Make the Payment</h4> <hr/>
+        <div>
+          <div class="billing-details" style="width:45%; float:right; text-align:left;">
+            <div class="billing-details-content">
+              <div class="bil-title">Billing Details</div>
+               <table>
+                <tr>
+                  <td><i class="material-icons">favorite</i> Custom Card</td>
+                  
+                  <td class="right-t">$5</td>
+                </tr>
+                <tr>
+                  <td><i class="material-icons">local_shipping</i> Shipping fee</td>
+                  <td class="right-t">$1</td>
+                </tr>
+                <tr>
+                  <td><i class="material-icons">money</i> Tax</td>
+                  <td class="right-t">$0.63</td>
+                </tr>
+                <tr class="br-top">
+                  <td>Amount Payable</td>
+                  <td class="right-t">$6.63</td>
+                </tr>
+               </table>
+            </div>
+          </div>
+          <div id="smart-button-container" style="float:left; width:45%;">
+          <div style="text-align: center;">
+            <div id="paypal-button-container"></div>
+            <input id="payment_id" value="<%=payment_id%>" hidden>
+          </div>
+        </div>
+      </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+
+function loadOverlay() {
+  $(".overlay").css('visibility', 'visible');
+  $(".overlay").css('opacity', 1.0);
+}
+
+function closeOverlay() {
+  $(".overlay").css('visibility', 'hidden');
+  $(".overlay").css('opacity', 0.0);
+}
+
+function initPayPalButton() {
+  paypal.Buttons({
+    style: {
+      shape: 'rect',
+      color: 'gold',
+      layout: 'vertical',
+      label: 'paypal',
+      
+    },
+
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          "amount":{
+            "currency_code":"USD",
+            "value":6.43,
+            "breakdown": {
+              "item_total": {
+                "currency_code":"USD",
+                "value":6
+              },
+            "shipping":{
+              "currency_code":"USD",
+              "value":0
+            },
+            "tax_total":{
+              "currency_code":"USD",
+              "value":0.43
+            }
+          }
+        }
+      }]});
+    },
+
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        var params = "";
+        var payment_id = $("#payment_id").val();
+        
+        params += "creation_time=" + details.create_time;
+        params += "&transaction_id=" + details.id;
+        params += "&status=" + details.status;
+        params += "&update_time=" + details.update_time;
+        params += "&payment_id=" + payment_id;
+        params += "&details=" + JSON.stringify(details);
+        
+        
+        const Http = new XMLHttpRequest();
+        const url = '/payment/' + payment_id + '/record';
+        Http.open("POST", url, true);
+
+        //Send the proper header information along with the request
+        Http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        Http.onprogress = (e) => {
+          console.log("loading..");
+          loadOverlay();
+        }
+
+        Http.onload = (e) => {
+          closeOverlay();
+          window.location.replace("/?payment=success");
+        }
+
+        Http.onerror = (e) => {
+          window.location.replace("/?payment=failure");
+        }
+
+        Http.send(params);
+      });
+    },
+
+    onError: function(err) {
+      console.log(err);
+    }
+  }).render('#paypal-button-container');
+}
+initPayPalButton();
+
+
+$(document).ready(function() {
+  var stepItem = $('.step-progress .step-slider .step-slider-item');
+  for (let i = 0; i < stepItem.length; i++) {
+    $(stepItem[i]).addClass('active');
+  }
+});
+
+</script>
+
+<%- include('footer') -%>

@@ -1,0 +1,512 @@
+<%- include('header') -%>
+
+<!-- !GET STARTED! -->
+<div class="w3-main w3-content w3-padding">  
+  <div class="card step-progress">
+    <div class="step-slider">
+      <div data-id="step1" class="step-slider-item"></div>
+      <div data-id="step2" class="step-slider-item"></div>
+      <div data-id="step3" class="step-slider-item"></div>
+    </div>
+
+    <form id="information-form" method="post" action="/preparation/savedb">
+    <!-- FORM AREA STARTS -->
+    <div class="step-content">
+      <div id="step1" class="step-content-body">
+        <h4>Step 1: Design the front of the card</h4> <hr/>
+        <div class="w3-half">
+          <canvas id='front_page' width='400px' height='400px'>
+            Canvas not supported in this browser.
+          </canvas>
+          <div class="button-group">
+            <div class="w3-quarter">
+              <div class="w3-half">
+                <i class="fa fa-rotate-right" style="font-size:24px" 
+                  onclick="canvas_front.rotateImage(true);"></i>
+              </div>
+              <div class="w3-half">
+                <i class="fa fa-rotate-left" style="font-size:24px" 
+                  onclick="canvas_front.rotateImage(false);"></i>
+              </div>
+              <br/>
+              Rotate
+            </div>
+
+            <div class="w3-quarter">
+              <div class="w3-half">
+                <i class="fa fa-plus" style="font-size:24px" 
+                  onclick="canvas_front.scaleImage(true);"></i>
+              </div>
+              <div class="w3-half">
+                <i class="fa fa-minus" style="font-size:24px" 
+                  onclick="canvas_front.scaleImage(false);"></i>
+              </div>
+              Scale
+            </div>
+
+            <div class="w3-quarter">
+              <center>
+                <table>
+                  <tr>
+                    <td class='color-box' style="background: #ffffff;">
+                    </td>
+                    <td class='color-box' style="background: #e7a9b8;">
+                    </td>
+                    <td class='color-box' style="background: #806eac;">
+                    </td>
+                    <td class='color-box' style="background: #0499cd;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class='color-box' style="background: #4cc298;">
+                    </td>
+                    <td class='color-box' style="background: #ea8556;">
+                    </td>
+                    <td class='color-box' style="background: #dcd976;">
+                    </td>
+                    <td class='color-box' style="background: #a73c44;">
+                    </td>
+                  </tr>
+                  <!--<tr><td colspan="4">Background</td></tr>-->
+                </table>
+              </center>
+              <div style="margin-top:8px">Background</div>
+            </div>
+
+            <div class="w3-quarter">
+              <i class="fa fa-trash w3-large" onclick="canvas_front.deleteSelectedImage();"></i><br/>
+              Delete
+            </div>
+          </div>
+        </div>
+
+        <div class="w3-half scroll-main">
+            <div id="d2" style="border: 1px solid grey;">
+              <input form="fakeForm" id="search-box" placeholder="Search images with keyword (e.g., new year)"></input>
+              <div id="d2i" style="padding-right: 20px;">
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/ballon.png" alt="Ballon">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/red-ribbon.png" alt="Red Ribbon">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/ballon.png" alt="Ballon">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/star.png" alt="Star">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/banner-golden.png" alt="Banner Golden">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/champange.png" alt="Cahmpange">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/mistletoe-decoration.png" alt="Mistleteo Decoration">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/mistletoe-branch.png" alt="Mistleteo Branch">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/mistletoe-close-up.png" alt="Mistleteo Closeup">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-gold.png" alt="New Year Golden">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-ballons-sticker.png" alt="New Year Ballons Sticker">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-banner.png" alt="New Year banner">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-curvey.png" alt="New Year Curvey">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-decor.png" alt="New Year Decor">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-dog.png" alt="New Year Dog">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-gold.png" alt="New Year Gold">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-lights.png" alt="New Year Lights">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-pink.png" alt="New Year Pink">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-with-ballons.png" alt="New Year With Ballons">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/new-year-with-fireworks.png" alt="New Year Fireworks">
+                </div>
+
+                <div class="w3-quarter" style="width:100px">
+                  <img src="/images/assets/two-champange.png" alt="Two champange glasses">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="step2" class="step-content-body out">
+        <h4>Step 2: Compose message</h4><hr/>
+        <div class="w3-half">
+          <canvas id='back_page' width='400px' height='400px' style='border: 1px solid;'>
+            Canvas not supported in this browser.
+          </canvas>
+        </div>
+        <div class="w3-half">
+
+          <label for="cardMessage">Message: </label>
+          <textarea id='cardMessage' name='cardMessage' cols="50" rows="10" oninput="updateText()" placeholder="Type your message here."></textarea>
+
+          <hr/>
+          
+          <label for="fontSize">Font Size: </label>
+          <input id="fontSize" name="fontSize" type="number" value='14'/>
+
+          <hr/>
+
+          <div class="dropdown">
+            <label for="fontList">Font Family: </label>
+            <button class="btn btn-default dropdown-toggle" type="button" id="fontList"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Select Font
+              <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu font-selection" aria-labelledby="fontList">
+              <li style = "font-family: Raleway;"><a href="#">Raleway</a></li>
+              <li style = "font-family: Montserrat"><a href="#">Montserrat</a></li>
+              <li style = "font-family: Titillium Web"><a href="#">Titillium Web</a></li>
+              <li style = "font-family: Pacifico"><a href="#">Pacifico</a></li>
+              <li style = "font-family: Josefin Slab"><a href="#">Josefin Slab</a></li>
+              <li style = "font-family: Orbitron"><a href="#">Orbitron</a></li>
+              <li style = "font-family: Comfortaa;"><a href="#">Comfortaa</a></li>
+              <li style = "font-family: Courgette;"><a href="#">Courgette</a></li>
+              <li style = "font-family: Ubuntu;"><a href="#">Ubuntu</a></li>
+              <li style = "font-family: Chewy;"><a href="#">Chewy</a></li>
+              <li style = "font-family: Lobster Two;"><a href="#">Lobster Two</a></li>
+              <li style = "font-family: Kaushan Script;"><a href="#">Kaushan Script</a></li>
+              <li style = "font-family: Economica;"><a href="#">Economica</a></li>
+              <li style = "font-family: Satisfy;"><a href="#">Satisfy</a></li>
+            </ul>
+          </div>
+
+          <hr/>
+        </div>
+      </div>
+      <div id="step3" class="step-content-body out">
+        <h4>Step 3: Add Sender & Recipient Details</h4><hr/>
+        
+        <div class="w3-half" style="padding: 10px;background: #e5e5e5;">
+          <h4>Sender Details</h4>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="senderFirstName">First Name</label>
+              <input type="text" class="form-control" name="senderFirstName" id="senderFirstName" placeholder="First Name" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="senderLastName">Last Name</label>
+              <input type="text" class="form-control" name="senderLastName" id="senderLastName" placeholder="Last Name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="senderAddress">Address</label>
+            <input type="text" class="form-control" name="senderAddress" id="senderAddress" placeholder="1234 Main St" required>
+          </div>
+          <div class="form-group">
+            <label for="senderAddress2">Address 2</label>
+            <input type="text" class="form-control" id="senderAddress2" name="senderAddress2" placeholder="Apartment, studio, or floor" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="senderCity">City</label>
+              <input type="text" class="form-control" id="senderCity" name="senderCity" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="senderState">State</label>
+              <input type="text" id="senderState" name="senderState" class="form-control" placeholder="California" required>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="senderZip">Zip</label>
+              <input type="text" class="form-control" id="senderZip" name="senderZip" required>
+            </div>
+          </div>          
+        </div>
+          
+        <div class="w3-half" style="padding: 10px; background: #f5f5f5;">
+          <h4>Reciever Details</h4>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="recieverFirstName">First Name</label>
+              <input type="text" class="form-control" id="recieverFirstName" name="recieverFirstName" placeholder="First Name" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="recieverLastName">Last Name</label>
+              <input type="text" class="form-control" id="recieverLastName" name="recieverLastName" placeholder="Last Name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="recieverAddress">Address</label>
+            <input type="text" class="form-control" id="recieverAddress" name="recieverAddress" placeholder="1234 Main St" required>
+          </div>
+          <div class="form-group">
+            <label for="recieverAddress2">Address 2</label>
+            <input type="text" class="form-control" id="recieverAddress2" name="recieverAddress2" placeholder="Apartment, studio, or floor" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="recieverCity">City</label>
+              <input type="text" class="form-control" id="recieverCity" name="recieverCity" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="recieverState">State</label>
+              <input type="text" id="recieverState" name="recieverState" class="form-control" placeholder="California"  required>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="recieverZip">Zip</label>
+              <input type="text" class="form-control" id="recieverZip" name="recieverZip" required>
+            </div>
+          </div>          
+        </div>
+      </div>
+
+      <div class="step-content-foot">
+        <button type="button" class="active" name="prev">Prev</button>
+        <button type="button" class="active" name="next">Next</button>
+        <button type="submit" onsubmit="packageInfo()" class="active out" name="finish">Proceed to Payment</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<script>
+var canvas_front;
+var canvas_back;
+var mousePress;
+
+var textProp = {
+  'font': 'Arial',
+  'fontSize': 14,
+};
+
+function rotateImage() {
+  canvas_front.rotateImage();
+}
+
+$(document).ready(function() {
+  let offset = {'x': 87, 'y': 50, 'w': 240, 'h': 310};
+  canvas_front = new CanvasUtils(
+    document.getElementById('front_page'));
+  canvas_front.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
+
+  canvas_back = new CanvasUtils(
+    document.getElementById('back_page'));
+  canvas_back.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
+
+  canvas_front.canvas.onmousedown = function (e) {
+    mousePress = true;
+    let idx = canvas_front.selectImage(e.clientX, e.clientY);
+    canvas_front.sel_image = idx;
+    canvas_front.updateCanvas();
+    canvas_front.canvas.onmousemove = function(e) {
+      if (mousePress) {
+        if (idx != -1) {
+          canvas_front.moveImage(idx, e.clientX, e.clientY);
+          canvas_front.updateCanvas();
+          canvas_front.writeCords(e.clientX, e.clientY);
+        }
+      }
+    };
+  }
+
+  canvas_front.canvas.onmouseup = function(e) {
+    mousePress = false;
+  }
+
+  
+  $('ul.font-selection li').on('click',function(){
+    textProp.font = $(this).css("font-family");
+    let caret = '<span class="caret"></span>';
+    $('#fontList').html(textProp.font + " " + caret);
+    updateText();
+  });
+
+  $('#fontSize').click(function() {
+    textProp.fontSize = parseInt($('#fontSize').val());
+    updateText();
+  });
+
+  handleSteps();
+
+  <% if (typeof designParams != "undefined") { %>
+  var designParams = <%- JSON.stringify(designParams) %>
+  for (let i = 0; i < designParams.length; i++) {
+    canvas_front.drawImageWithData(designParams[i].image_id, designParams[i].x, designParams[i].y, designParams[i].w, designParams[i].h, designParams[i].scale, designParams[i].rotation);
+  }
+
+  updateCanvas();
+
+  <% } %>
+
+  let navBars = $(".probootstrap-nav li");
+  for (let i = 0; i < navBars.length; i++) {
+    if (i == 1) {
+      $(navBars[i]).addClass("active");
+    } else {
+      $(navBars[i]).removeClass("active");
+    }
+  }
+});
+
+function updateText() {
+  let myText = document.getElementById("cardMessage").value;
+  canvas_back.drawText(myText, textProp);
+}
+
+$('.scroll-main img').on('click', function() {
+  let img_src = $(this).attr('src');
+  canvas_front.drawImage(img_src, 0.1);
+  // canvas_front.drawText()
+});
+
+$('.color-box').on('click', function() {
+  let bg_color = $(this).css("backgroundColor");
+  canvas_front.setBackgroundColor(bg_color);
+  canvas_back.setBackgroundColor(bg_color);
+});
+
+$("#search-box").on('keypress', function(e) {
+  if (e.keyCode == 13 && $(this).val().length > 0) {
+    const Http = new XMLHttpRequest();
+    Http.responseType = 'json';
+    const url='/assets?search=' + $(this).val();
+    Http.open("GET", url);
+    Http.send();
+    Http.onreadystatechange= (e) => {
+      let assets_html = "";
+      let res = Http.response;
+      if (typeof res != 'undefined' && res != null && res.length > 0) {
+        for (let i = 0; i < res.length; i++) {
+          assets_html += '<div class="w3-quarter" style="width:100px">' + 
+            `<img src="${res[i].path}">` +
+            '</div>';
+        }
+        $("#d2i").html(assets_html);
+
+        $('.scroll-main img').on('click', function() {
+          let img_src = $(this).attr('src');
+          canvas_front.drawImage(img_src, 0.1);
+        });
+      }
+    }
+  }
+});
+
+
+// see https://css-tricks.com/forums/topic/back-button-on-multistep-form/
+function handleSteps() {
+  // const urlParams = new URLSearchParams(window.location.search);
+  // const myParam = urlParams.get('design');
+
+  var step = 0;
+  var stepItem = $('.step-progress .step-slider .step-slider-item');
+  /*for (let i = 0; i < stepItem.length; i++) {
+    if (i != step) {
+      $('#' + stepItem[step].dataset.id).addClass('out');
+      $('#step' + ( i + 1)).addClass('out');
+    }
+  }
+  
+  $('#step' + (step + 1)).removeClass('out');
+  $(stepItem[step]).addClass('active');
+  $('#' + stepItem[step].dataset.id).removeClass('out');
+
+  if (step == 0) {
+    $('.step-content .step-content-foot button[name="prev"]').addClass('out');
+  }*/
+  
+  // Step Next
+  $('.step-content .step-content-foot button[name="next"]').on('click', function() {
+    if (step == 0) {
+      saveImageData(canvas_front.images);
+      saveCanvasBackground(canvas_front.backgroundColor);
+    } else if (step == 1) {
+      saveCanvasMessage(canvas_back.lines, textProp.font);
+    }
+
+    var instance = $(this);
+    if (stepItem.length - 1 < step) {
+      return;
+    }
+    $('.step-content .step-content-foot button[name="prev"]').removeClass('out');
+    if (step == (stepItem.length - 2)) {
+      instance.addClass('out');
+      instance.siblings('button[name="finish"]').removeClass('out');
+    }
+    $(stepItem[step]).addClass('active');
+    $('.step-content-body').addClass('out');
+
+    step++;
+    $('#' + stepItem[step].dataset.id).removeClass('out');
+  });
+
+  // Step Last
+  $('.step-content .step-content-foot button[name="finish"]').on('click', function() {
+    // $(stepItem[stepItem.length - 1]).addClass('active');
+    // $('.step-content-body').addClass('out');
+    // $('#stepLast').removeClass('out');
+    // step++;
+  });
+
+  // Step Previous
+  $('.step-content .step-content-foot button[name="prev"]').on('click', function() {
+    if (step - 1 < 0) {
+      return;
+    }
+    step--;
+    var instance = $(this);
+    if (step <= (stepItem.length - 1)) {
+      instance.siblings('button[name="next"]').removeClass('out');
+      instance.siblings('button[name="finish"]').addClass('out');
+    }
+    $('.step-content-body').addClass('out');
+    $('#' + stepItem[step].dataset.id).removeClass('out');
+    if (step === 0) {
+      stepItem.removeClass('active');
+    } else {
+      stepItem.filter(':gt(' + (step - 1) + ')').removeClass('active');
+    }
+    if (step - 1 < 0) {
+      $('.step-content .step-content-foot button[name="prev"]').addClass('out');
+    }
+  });
+}
+
+</script>
+
+<%- include('footer') -%>

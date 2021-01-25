@@ -1,0 +1,26 @@
+<%- include('header') -%>
+
+<div class="container my-5" >
+    <section class="about-us">
+        <div class="text-center mb-5">
+            <h2 class="font-weight-bold display-4 ">About <span style="color: #1FAD9F">Us</span></h2>
+        </div>
+        <div class="col-12 col-md-6 mx-auto">
+        	Shanghai Sky-xing International Transportation Co., Ltd. has been established since 2005. We are an international freight forwarder offering import and export freight forwarding, specialized service for over 50 countries. We supply service base on Shanghai International Airpot. We cooperate with major cargo airlines and local companies to take care of your transportation needs at an acceptable rate.
+        </div>
+    </section>
+</div>
+
+<script>
+$(document).ready(function() {
+  let navBars = $(".probootstrap-nav li");
+  for (let i = 0; i < navBars.length; i++) {
+    if (i == 3) {
+      $(navBars[i]).addClass("active");
+    } else {
+      $(navBars[i]).removeClass("active");
+    }
+  }
+});
+</script>
+<%- include('footer') -%>

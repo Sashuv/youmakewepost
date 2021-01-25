@@ -1,0 +1,18 @@
+<%- include('header') -%>
+
+<div class="card-columns">
+  <% for(var i=0; i < Math.min(7, templates.length); i++) { %>
+    <div class="card">
+      <a href="/preparation?design=<%= templates[i].id %>">
+        <img class="card-img-top probootstrap-animate" src="<%= templates[i].image_path %>" alt="templates[i].image_title" data-animate-effect="fadeIn">
+      </a>
+    </div>
+  <% } %>
+</div>
+
+
+<script>
+function init() {}
+</script>
+
+<%- include('footer') -%>

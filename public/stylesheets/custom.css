@@ -1,0 +1,197 @@
+.vl {
+border-left: 2px solid grey;
+height: 500px;
+position: absolute;
+left: 50%;
+z-index: 2;
+margin-left: -3px;
+top: 0;
+}
+
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Karma", sans-serif
+}
+.w3-bar-block .w3-bar-item {
+  padding:20px
+}
+
+.color-box {
+  border: 1px solid black;
+  width: 20px;
+  height: 20px;
+}
+
+.logo-title {
+  text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.card {
+  position: relative;
+  margin-bottom: 24px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.step-progress {
+  padding: 16px;
+  background-color: #FAFAFA;
+  margin: 0 auto;
+}
+
+.step-progress .step-slider {
+  width: 100%;
+}
+
+.step-progress .step-slider .step-slider-item {
+  width: 33%;
+  height: 1px;
+  position: relative;
+  float: left;
+  background-color: #E0E0E0;
+}
+
+.step-progress .step-slider .step-slider-item:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: -6px;
+  right: 0;
+  background-color: #FAFAFA;
+  border: 1px solid #E0E0E0;
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.3s ease-out 0.5s;
+  -webkit-transition: all 0.3s ease-out 0.5s;
+}
+
+.step-progress .step-slider .step-slider-item:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: #B0BEC5;
+  z-index: 1;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.step-progress .step-slider .step-slider-item.active:before {
+  width: 100%;
+  background-color: #FF8F00;
+}
+
+.step-progress .step-slider .step-slider-item.active:after {
+  border-color: #FF8F00;
+}
+
+.step-content {
+  padding: 16px 0;
+}
+
+.step-content .step-content-foot {
+  text-align: right;
+}
+
+.step-content .step-content-foot button {
+  border: 0;
+  padding: 8px 16px;
+  background-color: #CFD8DC;
+  font-size: 14px;
+  border-radius: 3px;
+  outline: 0;
+}
+
+.step-content .step-content-foot button:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.step-content .step-content-foot button.out {
+  display: none;
+}
+
+.step-content .step-content-foot button.disable {
+  background-color: #ECEFF1;
+}
+
+.step-content .step-content-foot button.active {
+  background-color: #00ACC1;
+  color: white;
+}
+
+.step-content .step-content-body {
+  padding: 16px 0;
+  text-align: center;
+  font-size: 18px;
+}
+
+.step-content .step-content-body.out {
+  display: none;
+}
+
+#d1,#d2,#d3,#d4,#d5,
+#d6,#d7,#d8,#d9,#d10 {
+  margin:0px;
+  margin-right:0;
+  height:400px;
+  width:400px;
+  display:inline-block;
+  overflow-x:hidden;
+ 
+}
+#d1i,#d2i,#d3i,#d4i,#d5i,
+#d6i,#d7i,#d8i,#d9i,#d10i {
+  margin:0px;
+  padding:0px;
+  height:auto;
+  width:400px;
+  display:block;
+  overflow:hidden;
+  font-size: small;
+}
+
+#d2::-webkit-scrollbar {
+    width: 16px;
+}
+#d2::-webkit-scrollbar-track {
+    background: #cccccc; 
+    XXborder-radius: 5px;
+}
+#d2::-webkit-scrollbar-thumb {
+    XXborder-radius: 5px;
+    background: gray;
+}
+
+/* perfect scrollbar - always visible: */
+.ps-container,
+.ps-scrollbar-x-rail, .ps-scrollbar-x,
+.ps-scrollbar-y-rail, .ps-scrollbar-y {
+  opacity: 1 !important;
+}
+
+/* stylying jScrollPane: */
+.jspTrack,.jspDrag {
+  border-radius: 8px;
+}
+.jspVerticalBar {
+  background: none;
+}
+
+.scroll-main img {
+  padding: 2px;
+  margin: 2px;
+}
+
+.scroll-main img:hover {
+  border: 1px solid grey;
+  padding: 2px;
+  margin: 2px;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>YouMakeWePost - Design Custom Greeting Cards & Share Them With Ease</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="You Make We Post" />
+    <meta name="keywords" content="custom greeting cards, mailing cards, mailing service, design cards, design greeting cards" />
+    <meta name="author" content="YouMakeWePost.com" />
+
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/open-iconic-bootstrap.min.css">
+    
+    <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/stylesheets/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/stylesheets/icomoon.css">
+    <link rel="stylesheet" href="/stylesheets/animate.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/stylesheets/custom.css">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu|Chewy|Quattrocento+Sans|Kaushan+Script|Comfortaa|Lobster+Two|Raleway|Montserrat|Titillium+Web|Josefin+Sans|Pacifico|Orbitron|Josefin+Slab|Satisfy|Economica|Courgette' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--<script src="/javascripts/jquery-3.2.1.slim.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+  </head>
+  <body>
+    <% if (locals.message) { %>
+      <div class="header-message <%= message_type %>">
+        <div style="margin: 2px; text-align: center; color: #000">
+          <a class="close" style="cursor: default" onclick="$('.header-message').slideUp();">&times;</a>
+          <div><%= message %></div>
+        </div>
+      </div>
+    <% } %>
+    
+    <aside class="probootstrap-aside js-probootstrap-aside">
+      <a href="#" class="probootstrap-close-menu js-probootstrap-close-menu d-md-none"><span class="oi oi-arrow-left"></span> Close</a>
+      <div class="probootstrap-site-logo probootstrap-animate" data-animate-effect="fadeInLeft">
+        
+        <a href="/" class="mb-2 d-block probootstrap-logo">YouMakeWePost</a>
+        <p class="mb-0">Design custom cards with ease & share love.</a></p>
+      </div>
+      <div class="probootstrap-overflow">
+        <nav class="probootstrap-nav">
+          <ul>
+            <li class="probootstrap-animate active" data-animate-effect="fadeInLeft"><a href="/">Home</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="/preparation">Get Started</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="/howto">Help</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="/about">About Us</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <footer class="probootstrap-aside-footer probootstrap-animate" data-animate-effect="fadeInLeft">
+          <ul class="list-unstyled d-flex probootstrap-aside-social">
+            <li><a href="#" class="p-2"><span class="icon-twitter"></span></a></li>
+            <li><a href="#" class="p-2"><span class="icon-instagram"></span></a></li>
+            <li><a href="#" class="p-2"><span class="icon-dribbble"></span></a></li>
+          </ul>
+          <p>&copy; 2021 youmakewepost. <br> All Rights Reserved.</p>
+        </footer>
+      </div>
+    </aside>
+
+
+    <main role="main" class="probootstrap-main js-probootstrap-main">
+      <div class="probootstrap-bar">
+        <a href="#" class="probootstrap-toggle js-probootstrap-toggle"><span class="oi oi-menu"></span></a>
+        <div class="probootstrap-main-site-logo"><a href="/">YouMakeWePost</a></a></div>
+      </div>
