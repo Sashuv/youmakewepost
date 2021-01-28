@@ -12,32 +12,7 @@
   </div>
 </form>
 
-<button onclick="loadOverlay()">Popup</button>
-
-<div id="popup" class="overlay">
-  <div class="popup">
-    <h2>Here i am</h2>
-    <a class="close" onclick="closeOverlay()">&times;</a>
-    <div class="content">
-      <div class="loader">Loading</div>
-      Thank to pop me out of that button, but now i'm done so you can close this window.
-    </div>
-  </div>
-</div>
-
-
 <script>
-
-function loadOverlay() {
-  $(".overlay").css('visibility', 'visible');
-  $(".overlay").css('opacity', 1.0);
-}
-
-function closeOverlay() {
-  $(".overlay").css('visibility', 'hidden');
-  $(".overlay").css('opacity', 0);
-}
-
 $(document).ready(function() {
   let navBars = $(".probootstrap-nav li");
   for (let i = 0; i < navBars.length; i++) {

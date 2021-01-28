@@ -20,12 +20,12 @@ function saveImageData(img_data) {
 }
 
 function saveFontFace(fontFace) {
-	$("#information-form").remove("#messageFont");
+	$("#information-form #messageFont").remove();
 	$("#information-form").append(createHiddenInput(fontFace, "messageFont"));
 }
 
 function saveCanvasMessage(message, fontFace) {
-	$("#information-form").remove("#canvasMessage");
+	$("#information-form #canvasMessage").remove();
 	var canvasMessage = "";
 	if (message.length > 0) {
 		canvasMessage = message.join("<linebreak>");
@@ -35,7 +35,7 @@ function saveCanvasMessage(message, fontFace) {
 }
 
 function saveCanvasBackground(canvasBackground) {
-	$("#information-form").remove("#canvasBackground");
+	$("#information-form #canvasBackground").remove();
 	$("#information-form").append(createHiddenInput(canvasBackground, "canvasBackground"));
 }
 

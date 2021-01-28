@@ -34,8 +34,6 @@ router.post('/savedb', function(req, res, next) {
   var cardFont = req.body.messageFont;
   var fontSize = req.body.fontSize;
   var canvasBackground = req.body.canvasBackground;
-
-  console.log(canvasBackground);
   var canvasMessage = req.body.canvasMessage;
 
   var sql = "INSERT INTO MainTable (senderFirstName, senderLastName, senderAddress, senderAddress2, " +
