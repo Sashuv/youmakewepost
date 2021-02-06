@@ -1,6 +1,7 @@
 function saveImageData(img_data) {
 	$("[name^='assets_']").remove();
 	for (let i = 0; i < img_data.length; i++) {
+		if (img_data[i].bg == true) continue;
 		$("#information-form").append(
 			createHiddenInputClass(img_data[i].id, "assets_id", `assets_id_${i}`));
 		$("#information-form").append(
@@ -37,6 +38,11 @@ function saveCanvasMessage(message, fontFace) {
 function saveCanvasBackground(canvasBackground) {
 	$("#information-form #canvasBackground").remove();
 	$("#information-form").append(createHiddenInput(canvasBackground, "canvasBackground"));
+}
+
+function saveCanvasData(canvasDataToURL) {
+	$("#information-form #canvasDataToURL").remove();
+	$("#information-form").append(createHiddenInput(canvasDataToURL, "canvasDataToURL"));
 }
 
 function createHiddenInputClass(value, name, class_name) {

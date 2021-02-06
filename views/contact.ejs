@@ -1,6 +1,6 @@
 <%- include('header') -%>
 
-<form class="contact-form">
+<form class="box-form">
   <h2 class="contact-header font-weight-bold display-4">Contact <span style="color: #1FAD9F">Us</span></h2>
   <p class="contact-p" type="Name:"><input class="contact-input" placeholder="Write your name here.."></input></p>
   <p class="contact-p" type="Email:"><input class="contact-input" placeholder="Let us know how to contact you back.."></input></p>
@@ -16,7 +16,7 @@
 $(document).ready(function() {
   let navBars = $(".probootstrap-nav li");
   for (let i = 0; i < navBars.length; i++) {
-    if (i == 4) {
+    if (i == 5) {
       $(navBars[i]).addClass("active");
     } else {
       $(navBars[i]).removeClass("active");

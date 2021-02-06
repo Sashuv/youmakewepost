@@ -63,23 +63,37 @@ router.post('/savedb', function(req, res, next) {
   	if (error) throw error;
   	let insertId = results.insertId;
     let groupId = results.insertId % 2;
-  	if (req.body.assets_id.length > 0) {
+
+    if (typeof(req.body.assets_id) != "undefined") {
       var subSql = "INSERT INTO UserAssets (main_id, image_id, x, y, w, h, scale, rotation, group_id) VALUES ";
       var subSqlParams = [];
-      for (let i=0; i < req.body.assets_id.length; i++) {
-        subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        if (i != req.body.assets_id.length - 1) {
-          subSql += ", ";
-        }
 
+      if (typeof(req.body.assets_id) != "string") {
+        for (let i=0; i < req.body.assets_id.length; i++) {
+          subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+          if (i != req.body.assets_id.length - 1) {
+            subSql += ", ";
+          }
+          subSqlParams.push(insertId);
+          subSqlParams.push(req.body.assets_id[i]);
+          subSqlParams.push(parseInt(req.body.assets_x[i]));
+          subSqlParams.push(parseInt(req.body.assets_y[i]));
+          subSqlParams.push(parseInt(req.body.assets_w[i]));
+          subSqlParams.push(parseInt(req.body.assets_h[i]));
+          subSqlParams.push(req.body.assets_scale[i]);
+          subSqlParams.push(req.body.assets_rotation[i]);
+          subSqlParams.push(groupId);
+        }
+      } else {
+        subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?)"
         subSqlParams.push(insertId);
-        subSqlParams.push(req.body.assets_id[i]);
-        subSqlParams.push(parseInt(req.body.assets_x[i]));
-        subSqlParams.push(parseInt(req.body.assets_y[i]));
-        subSqlParams.push(parseInt(req.body.assets_w[i]));
-        subSqlParams.push(parseInt(req.body.assets_h[i]));
-        subSqlParams.push(req.body.assets_scale[i]);
-        subSqlParams.push(req.body.assets_rotation[i]);
+        subSqlParams.push(req.body.assets_id);
+        subSqlParams.push(parseInt(req.body.assets_x));
+        subSqlParams.push(parseInt(req.body.assets_y));
+        subSqlParams.push(parseInt(req.body.assets_w));
+        subSqlParams.push(parseInt(req.body.assets_h));
+        subSqlParams.push(req.body.assets_scale);
+        subSqlParams.push(req.body.assets_rotation);
         subSqlParams.push(groupId);
       }
 

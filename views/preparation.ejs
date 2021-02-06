@@ -181,7 +181,7 @@
         <div class="w3-half">
 
           <label for="cardMessage">Message: </label>
-          <textarea id='cardMessage' name='cardMessage' cols="50" rows="10" oninput="updateText()" placeholder="Type your message here."></textarea>
+          <textarea id='cardMessage' name='cardMessage' cols="40" rows="10" oninput="updateText()" placeholder="Type your message here."></textarea>
 
           <hr/>
           
@@ -244,15 +244,15 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="senderCity">City</label>
-              <input type="text" class="form-control" id="senderCity" name="senderCity" required>
+              <input type="text" class="form-control" id="senderCity" name="senderCity"  placeholder="e.g., Austin" required>
             </div>
             <div class="form-group col-md-4">
               <label for="senderState">State</label>
-              <input type="text" id="senderState" name="senderState" class="form-control" placeholder="California" required>
+              <input type="text" id="senderState" name="senderState" class="form-control" placeholder="e.g., TX" required>
             </div>
             <div class="form-group col-md-2">
               <label for="senderZip">Zip</label>
-              <input type="text" class="form-control" id="senderZip" name="senderZip" required>
+              <input type="text" class="form-control" maxlength="5" id="senderZip" name="senderZip" required>
             </div>
           </div>          
         </div>
@@ -280,15 +280,15 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="recieverCity">City</label>
-              <input type="text" class="form-control" id="recieverCity" name="recieverCity" required>
+              <input type="text" class="form-control" id="recieverCity" placeholder="e.g., Brooklyn" name="recieverCity" required>
             </div>
             <div class="form-group col-md-4">
               <label for="recieverState">State</label>
-              <input type="text" id="recieverState" name="recieverState" class="form-control" placeholder="California"  required>
+              <input type="text" id="recieverState" name="recieverState" class="form-control" placeholder="e.g., NY"  required>
             </div>
             <div class="form-group col-md-2">
               <label for="recieverZip">Zip</label>
-              <input type="text" class="form-control" id="recieverZip" name="recieverZip" required>
+              <input type="text" class="form-control" id="recieverZip" maxlength="5" name="recieverZip" required>
             </div>
           </div>          
         </div>
@@ -364,11 +364,10 @@ $(document).ready(function() {
   handleSteps();
 
   <% if (typeof designParams != "undefined") { %>
-  var designParams = <%- JSON.stringify(designParams) %>
-  for (let i = 0; i < designParams.length; i++) {
-    canvas_front.drawImageWithData(designParams[i].image_id, designParams[i].x, designParams[i].y, designParams[i].w, designParams[i].h, designParams[i].scale, designParams[i].rotation);
-  }
-
+    var designParams = <%- JSON.stringify(designParams) %>
+    for (let i = 0; i < designParams.length; i++) {
+      canvas_front.drawImageWithData(designParams[i].image_id, designParams[i].x, designParams[i].y, designParams[i].w, designParams[i].h, designParams[i].scale, designParams[i].rotation);
+    }
   <% } %>
 
   let navBars = $(".probootstrap-nav li");
@@ -453,6 +452,7 @@ function handleSteps() {
     if (step == 0) {
       saveImageData(canvas_front.images);
       saveCanvasBackground(canvas_front.backgroundColor);
+      // saveCanvasData(canvas_front.canvas.toDataURL());
     } else if (step == 1) {
       saveCanvasMessage(canvas_back.lines, textProp.font);
     }

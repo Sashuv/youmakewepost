@@ -606,7 +606,7 @@ textarea {
   position: relative
 }
 
-.contact-form {
+.box-form {
   width: 440px;
   height: 540px;
   border-radius: 8px;
@@ -617,6 +617,56 @@ textarea {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
   position: relative
+}
+
+.tracker-header {
+  margin: 10px 0;
+  padding-bottom: 10px;
+  width: 280px;
+
+  border-bottom: 3px solid #78788c
+}
+
+.tracker-input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background: none;
+  outline: none;
+  resize: none;
+  border: 0;
+  font-family: 'Montserrat', sans-serif;
+  transition: all .3s;
+  border-bottom: 2px solid #bebed2
+}
+
+.tracker-input:focus {
+  border-bottom: 2px solid #78788c
+}
+
+.tracker-p:before {
+  content: attr(type);
+  display: block;
+  margin: 28px 0 0;
+  font-size: 14px;
+  color: #5a5a5a
+}
+
+.tracker-button {
+  float: right;
+  padding: 8px 12px;
+  margin: 8px 0 0;
+  font-family: 'Montserrat', sans-serif;
+  border: 2px solid #78788c;
+  background: 0;
+  color: #5a5a6e;
+  cursor: pointer;
+  transition: all .3s
+}
+
+.tracker-button:hover {
+  background: #78788c;
+  color: #fff
 }
 
 .contact-header {
@@ -690,7 +740,7 @@ textarea {
   width: 150px;
   height: 150px;
   line-height: 150px;
-  margin: 100px auto;
+  margin: 10px auto;
   position: relative;
   box-sizing: border-box;
   text-align: center;
@@ -709,8 +759,8 @@ textarea {
   width: 100%;
   height: 100%;
   border-radius: 100px;
-  border: 5px solid #000;
-  box-shadow: 0 0 50px #000, inset 0 0 50px #000;
+  border: 5px solid #1FAD9F;
+  box-shadow: 0 0 50px #1FAD9F, inset 0 0 50px #000;
 }
 
 .loader:after {
@@ -729,7 +779,7 @@ textarea {
     opacity: 0;
   }
   50% {
-    opacity: 1;
+    opacity: 0.5;
   }
   100% {
     -webkit-transform: scale(1);
@@ -765,6 +815,7 @@ textarea {
   transition: opacity 500ms;
   visibility: hidden;
   opacity: 0.0;
+  z-index: 100;
 }
 
 .popup {
@@ -846,4 +897,26 @@ tr.br-top td {
 }
 tr.br-top td.right-t {
     font-size: 16px;
+}
+
+.sub-header {
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.sub-sub-header {
+  font-weight: 200;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+div.vertical-line{
+  width: 0.5px;
+  background-color: #c5c5c5;
+  height: 100%;
+  float: left;
+  border: 0.5px dotted #c5c5c5 ;
+  border-radius: 0.5px;
+  margin-top: 25px;
 }

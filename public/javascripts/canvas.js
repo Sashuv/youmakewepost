@@ -12,6 +12,8 @@ class CanvasUtils {
 		this.backgroundColor = "rgb(255, 255, 255)";
 
 		this.lines = [];
+
+		this.imageURL = "";
 	}
 
 	setBackgroundColor(color) {
@@ -30,19 +32,19 @@ class CanvasUtils {
 		let img = new Image;
 		var self = this;
 		img.onload  = function () {
-			self.ctx.drawImage(img, 0, 0, 400, 400);
+			self.ctx.drawImage(img, 0, 0, self.canvas.width, self.canvas.height);
 			self.images.push({
 				'id': image_path,
 				'img': img,
 				'x': 0,
 				'y': 0,
-				'w': 400,
-				'h': 400,
+				'w': self.canvas.width,
+				'h': self.canvas.height,
 				'scale': 1,
 				'rotate': 0,
 				'bg': true
 			});
-			self.updateCanvas();
+			self.updateCanvas(false);
 		}
 		img.src = image_path;
 		this.offset = offset;
@@ -69,11 +71,14 @@ class CanvasUtils {
 		this.updateCanvas();
 	}
 
-	updateCanvas() {
-		this.ctx.fillStyle = this.backgroundColor;
-		this.ctx.fillRect(0, 0, 400, 400);
+	updateCanvas(fill=true) {
+		if (fill) {
+			this.ctx.fillStyle = this.backgroundColor;
+			this.ctx.fillRect(this.offset.x, this.offset.y, 
+				this.offset.w, this.offset.h);
+		}
 
-		let bg_id = 0;
+		let bg_id = -1;
 		for (let i = 0; i < this.images.length; i++) {
 			if (this.sel_image == i) {
 				continue;
@@ -97,8 +102,10 @@ class CanvasUtils {
 			this.ctx.setTransform(1, 0, 0, 1, 0, 0);
 		}
 
-		this.ctx.drawImage(this.images[bg_id].img, this.images[bg_id].x, 
-			this.images[bg_id].y, this.images[bg_id].w, this.images[bg_id].h);
+		if (bg_id != -1) {
+			this.ctx.drawImage(this.images[bg_id].img, this.images[bg_id].x, 
+				this.images[bg_id].y, this.images[bg_id].w, this.images[bg_id].h);
+		}
 
 		if (this.sel_image >= 0) {
 			let image = this.images[this.sel_image];
@@ -203,14 +210,29 @@ class CanvasUtils {
 		return -1;
 	}
 
-	drawText(myText, textProp) {
-		this.updateCanvas();
-		this.ctx.font = `${textProp.fontSize}px ${textProp.font}`;
+	drawText(myText, textProp, fit_text=true) {
+		this.ctx.fillStyle = this.backgroundColor;
+		this.ctx.fillRect(this.offset.x, this.offset.y, 
+			this.offset.w, this.offset.h);	
 
+		this.ctx.font = `${textProp.fontSize}px ${textProp.font}`;
 		let offset = Object.create(this.offset);
+		let lineWidth = textProp.fontSize;
+
 		offset.x += 10;
 		offset.y += textProp.fontSize + 20;
-		this.lines = this.fitText(myText, textProp, offset);
+		if (fit_text) {
+			this.lines = this.fitText(myText, textProp, offset);
+		} else {
+			this.lines = myText.split("<linebreak>");
+
+			this.ctx.fillStyle = "black";
+			for (let i = 0; i < this.lines.length; i++) {
+				this.ctx.fillText(this.lines[i], offset.x, 
+					offset.y + (i * lineWidth));
+			}
+		}
+		
 	}
 
 	fitText(myText, textProp, offset) {

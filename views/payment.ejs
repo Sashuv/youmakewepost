@@ -1,18 +1,7 @@
 <%- include('header') -%>
 
-<div id="popup" class="overlay">
-  <div class="popup">
-    <h2>Here i am</h2>
-    <a class="close" href="#">&times;</a>
-    <div class="content">
-      <div class="loader">Loading</div>
-      Thank to pop me out of that button, but now i'm done so you can close this window.
-    </div>
-  </div>
-</div>
-
 <!-- !GET STARTED! -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">  
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">  
   <div class="card step-progress">
     <div class="step-slider">
       <div data-id="step1" class="step-slider-item"></div>
@@ -21,42 +10,149 @@
     </div>
     <div class="step-content">
       <div id="stepLast" class="step-content-body">
-        <h4>Step 4: Make the Payment</h4> <hr/>
-        <div>
-          <div class="billing-details" style="width:45%; float:right; text-align:left;">
-            <div class="billing-details-content">
-              <div class="bil-title">Billing Details</div>
-               <table>
-                <tr>
-                  <td><i class="material-icons">favorite</i> Custom Card</td>
-                  
-                  <td class="right-t">$5</td>
-                </tr>
-                <tr>
-                  <td><i class="material-icons">local_shipping</i> Shipping fee</td>
-                  <td class="right-t">$1</td>
-                </tr>
-                <tr>
-                  <td><i class="material-icons">money</i> Tax</td>
-                  <td class="right-t">$0.63</td>
-                </tr>
-                <tr class="br-top">
-                  <td>Amount Payable</td>
-                  <td class="right-t">$6.63</td>
-                </tr>
-               </table>
+        <h4>Step 4: Make the Payment</h4><hr/>
+          
+        <div class="order-summary" style="margin-top:10px; overflow: auto;">
+          <div class="sub-header"> Order Details </div>
+          
+          <!-- Art Works -->
+          <div style='padding-right: 20px; float: left; width:50%'>
+            <div class="sub-sub-header"> Your Card (Front & Back) </div>
+            <div class="w3-half" style='padding: 10px'>
+              <canvas id="design_canvas" width="200px" height="200px" style="border: 1px black solid;"></canvas>
+            </div>
+            <div class="w3-half"  style='padding: 10px'>
+              <canvas id="text_canvas" width="200px" height="200px" style="border: 1px black solid;"></canvas>
             </div>
           </div>
-          <div id="smart-button-container" style="float:left; width:45%;">
-          <div style="text-align: center;">
-            <div id="paypal-button-container"></div>
-            <input id="payment_id" value="<%=payment_id%>" hidden>
+
+          <div class="vertical-line" style="height: 200px"></div>
+
+          <!-- Delivery Address -->
+          <div style="width:45%; float:right;">
+            <div class="sub-sub-header">Delivery Address</div>
+            <div class="billing-details-content">  
+              <table style="text-align:left;">
+              <tr>
+                <td>
+                <i class="material-icons">mail_outline</i> Recipient</td>
+                <td class="right-t"><%= recieverFirstName %> <%= recieverLastName %></td>
+
+              </tr>
+              <tr class="br-top">
+                <td>
+                  <i class="material-icons">house</i> Address
+                </td>
+                <td class="right-t">
+                  <%= recieverAddress %>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <i class="material-icons">house</i> Address 2
+                </td>
+                <td class="right-t">
+                  <%= recieverAddress2 %>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <i class="material-icons">domain</i> City (Zip)
+                </td>
+                <td class="right-t">
+                  <%= recieverCity %> (<%= recieverZip %>)
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <i class="material-icons">room</i> State
+                </td>
+                <td class="right-t">
+                  <%= recieverState %>
+                </td>
+              </tr>
+              
+              </table>
+            </div>
           </div>
+          <!--
+          <div style='padding-left: 20px; float: right; width: 30%;'>
+            <div class="sub-sub-header">Delivery Address</div>
+            <div class="content" style="text-align:left; color: #1FAD9F; padding: 10px; line-height: 1.8;">
+              <%= recieverFirstName %> <%= recieverLastName %><br/>
+              <%= recieverAddress %>,<br/> 
+              <%= recieverAddress2 %><br/>
+              <%= recieverCity %>, <%= recieverState %>, <%= recieverZip %><br/>
+              United States
+            </div>
+          </div> -->
+        </div>
+
+        <hr/>
+        
+        <!-- Payment Div -->
+        <div>
+          <!-- Paypal Buttons -->
+          <div style="float:left; width:45%; margin-right: 5%;">
+            <div class="sub-sub-header">Payment Options </div>
+              <div style="text-align: center;">
+                <div id="paypal-button-container"></div>
+                <input id="payment_id" value="<%=payment_id%>" hidden>
+              </div>
+          </div>
+
+          <div class="vertical-line" style="height: 200px"></div>
+
+          <!-- Billing Details -->
+          <div class="billing-details" style="width:45%; float:right;">
+          <div class="sub-sub-header">Billing Details</div>
+            <div class="billing-details-content">
+              <table style="text-align:left;">
+              <tr>
+                <td>
+                <i class="material-icons">favorite</i> Custom Card</td>
+                <td class="right-t">$5</td>
+
+              </tr>
+              <tr>
+                <td><i class="material-icons">local_shipping</i> Shipping fee</td>
+                <td class="right-t">$1</td>
+              </tr>
+              <tr>
+                <td><i class="material-icons">money</i> Tax</td>
+                <td class="right-t">$0.63</td>
+              </tr>
+              <tr class="br-top">
+                <td>Amount Payable</td>
+                <td class="right-t">$6.63</td>
+              </tr>
+              </table>
+            </div>
+          </div>
+
+          
+
+          
         </div>
       </div>
-      </div>
-      </form>
     </div>
+  </div>
+</div>
+
+<div id="popup" class="overlay">
+  <div class="popup">
+    <center>
+    <br/>
+    <div class='sub-header'>Processing your payment</div>
+    <a class="close" onclick="closeOverlay();" href="#">&times;</a>
+    <div class="content">
+      <div class="loader">Processing</div>
+      Thank you for the payment! We are processing your order. Please bear with us for few moments.
+    </div>
+    </center>
   </div>
 </div>
 
@@ -84,11 +180,12 @@ function initPayPalButton() {
     },
 
     createOrder: function(data, actions) {
+      loadOverlay();
       return actions.order.create({
         purchase_units: [{
           "amount":{
             "currency_code":"USD",
-            "value":6.43,
+            "value":6.63,
             "breakdown": {
               "item_total": {
                 "currency_code":"USD",
@@ -100,7 +197,7 @@ function initPayPalButton() {
             },
             "tax_total":{
               "currency_code":"USD",
-              "value":0.43
+              "value":0.63
             }
           }
         }
@@ -127,14 +224,10 @@ function initPayPalButton() {
         //Send the proper header information along with the request
         Http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-        Http.onprogress = (e) => {
-          console.log("loading..");
-          loadOverlay();
-        }
-
         Http.onload = (e) => {
           closeOverlay();
-          window.location.replace("/?payment=success");
+          response = JSON.parse(Http.responseText);
+          window.location.replace("/tracker?payment=success&order=" + response.orderNumber);
         }
 
         Http.onerror = (e) => {
@@ -146,18 +239,51 @@ function initPayPalButton() {
     },
 
     onError: function(err) {
+      closeOverlay();
+      alert("There was an error processing your order.");
       console.log(err);
     }
   }).render('#paypal-button-container');
 }
 initPayPalButton();
 
+var canvas_front_utils;
+var canvas_back_utils;
 
 $(document).ready(function() {
   var stepItem = $('.step-progress .step-slider .step-slider-item');
   for (let i = 0; i < stepItem.length; i++) {
     $(stepItem[i]).addClass('active');
   }
+  
+  let canvas_front = document.getElementById('design_canvas');
+  let canvas_back = document.getElementById('text_canvas');
+
+  canvas_front_utils = new CanvasUtils(canvas_front);
+  canvas_back_utils = new CanvasUtils(canvas_back);
+
+  // Front Canvas
+  let offset = {'x': 43, 'y': 25, 'w': 120, 'h': 155};
+  canvas_front_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
+  <% if (typeof designParams != "undefined") { %>
+    var params = <%- JSON.stringify(designParams) %>
+    for (let i = 0; i < params.assets_id.length; i++) {
+      canvas_front_utils.drawImageWithData(params.assets_id[i], (params.assets_x[i])/2, (params.assets_y[i])/2, (params.assets_w[i]), (params.assets_h[i]), (params.assets_scale[i]/2), params.assets_rotation[i]);
+    }
+    canvas_front_utils.setBackgroundColor(params.canvasBackground);
+    canvas_front_utils.updateCanvas();
+  <% } %>
+
+  // Back Canvas
+  canvas_back_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
+  let textProp = <%- JSON.stringify(textProp) %>;
+  textProp.fontSize = 0.5 * textProp.fontSize;
+  let message = "testing";
+  <% if (typeof canvasMessage != "undefined") { %>
+    message = "<%- canvasMessage %>";
+  <% } %>
+
+  canvas_back_utils.drawText(message, textProp, false);
 });
 
 </script>

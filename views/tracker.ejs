@@ -1,0 +1,21 @@
+<%- include('header') -%>
+
+<form class="box-form" method="GET" action="/tracker">
+  <h2 class="tracker-header font-weight-bold display-5">Order <span style="color: #1FAD9F">Tracker</span></h2>
+  <p class="tracker-p" type="Order #:"><input class="tracker-input" name="order" placeholder="Provide order number.."></input></p><br/>
+  <button class="tracker-button">Track</button>
+</form>
+
+<script>
+$(document).ready(function() {
+  let navBars = $(".probootstrap-nav li");
+  for (let i = 0; i < navBars.length; i++) {
+    if (i == 2) {
+      $(navBars[i]).addClass("active");
+    } else {
+      $(navBars[i]).removeClass("active");
+    }
+  }
+});
+</script>
+<%- include('footer') -%>
