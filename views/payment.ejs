@@ -250,7 +250,7 @@ initPayPalButton();
 var canvas_front_utils;
 var canvas_back_utils;
 
-$(document).ready(function() {
+$(document).ready(async function() {
   var stepItem = $('.step-progress .step-slider .step-slider-item');
   for (let i = 0; i < stepItem.length; i++) {
     $(stepItem[i]).addClass('active');
@@ -268,9 +268,18 @@ $(document).ready(function() {
   <% if (typeof designParams != "undefined") { %>
     var params = <%- JSON.stringify(designParams) %>
     for (let i = 0; i < params.assets_id.length; i++) {
-      canvas_front_utils.drawImageWithData(params.assets_id[i], (params.assets_x[i])/2, (params.assets_y[i])/2, (params.assets_w[i]), (params.assets_h[i]), (params.assets_scale[i]/2), params.assets_rotation[i]);
+      if (params.assets_type[i] == 'img') {
+        await canvas_front_utils.drawImageWithData(params.assets_id[i], (params.assets_x[i])/2,
+        (params.assets_y[i])/2, (params.assets_w[i]), (params.assets_h[i]), 
+        (params.assets_scale[i]/2), params.assets_rotation[i]);
+      } else {
+        canvas_front_utils.drawText(params.assets_id[i], params.assets_font[i],
+        params.assets_fontSize[i]/2, params.assets_color[i], params.assets_x[i]/2,
+        params.assets_y[i]/2);
+      }
     }
     canvas_front_utils.setBackgroundColor(params.canvasBackground);
+    canvas_front_utils.sel_data = -1;
     canvas_front_utils.updateCanvas();
   <% } %>
 
@@ -278,12 +287,12 @@ $(document).ready(function() {
   canvas_back_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
   let textProp = <%- JSON.stringify(textProp) %>;
   textProp.fontSize = 0.5 * textProp.fontSize;
-  let message = "testing";
+  let message = "";
   <% if (typeof canvasMessage != "undefined") { %>
     message = "<%- canvasMessage %>";
   <% } %>
 
-  canvas_back_utils.drawText(message, textProp, false);
+  canvas_back_utils.drawFixedText(message, textProp, false);
 });
 
 </script>

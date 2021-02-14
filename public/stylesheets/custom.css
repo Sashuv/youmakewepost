@@ -1,16 +1,17 @@
 .vl {
-border-left: 2px solid grey;
-height: 500px;
-position: absolute;
-left: 50%;
-z-index: 2;
-margin-left: -3px;
-top: 0;
+  border-left: 2px solid grey;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  z-index: 2;
+  margin-left: -3px;
+  top: 0;
 }
 
 body,h1,h2,h3,h4,h5,h6 {
   font-family: "Karma", sans-serif
 }
+
 .w3-bar-block .w3-bar-item {
   padding:20px
 }
@@ -101,7 +102,7 @@ img {
   text-align: right;
 }
 
-.step-content .step-content-foot button {
+button {
   border: 0;
   padding: 8px 16px;
   background-color: #CFD8DC;
@@ -110,15 +111,15 @@ img {
   outline: 0;
 }
 
-.step-content .step-content-foot button:active {
+button:active {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.step-content .step-content-foot button.out {
+button.out {
   display: none;
 }
 
-.step-content .step-content-foot button.disable {
+button.disable {
   background-color: #ECEFF1;
 }
 
@@ -137,18 +138,29 @@ img {
   display: none;
 }
 
-#d1,#d2,#d3,#d4,#d5,
-#d6,#d7,#d8,#d9,#d10 {
-  margin:0px;
-  margin-right:0;
-  height:400px;
-  width:400px;
-  display:inline-block;
-  overflow-x:hidden;
- 
+.fontholder_div {
+  margin: 0px;
+  padding: 5px;
+  margin-right: 0;
+  width: 400px;
+  display: inline-block;
 }
-#d1i,#d2i,#d3i,#d4i,#d5i,
-#d6i,#d7i,#d8i,#d9i,#d10i {
+
+.fontControls {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.scrollable_div {
+  margin: 0px auto;
+  height: 200px;
+  width: 90%;
+  display: inline-block;
+  overflow-x: hidden;
+  border: 1px solid grey;
+}
+
+#assets_holder {
   margin:0px;
   padding:0px;
   height:auto;
@@ -158,14 +170,14 @@ img {
   font-size: small;
 }
 
-#d2::-webkit-scrollbar {
+.scrollable_div::-webkit-scrollbar {
     width: 16px;
 }
-#d2::-webkit-scrollbar-track {
+.scrollable_div::-webkit-scrollbar-track {
     background: #cccccc; 
     XXborder-radius: 5px;
 }
-#d2::-webkit-scrollbar-thumb {
+.scrollable_div::-webkit-scrollbar-thumb {
     XXborder-radius: 5px;
     background: gray;
 }
@@ -194,4 +206,42 @@ img {
   border: 1px solid grey;
   padding: 2px;
   margin: 2px;
+}
+
+[type='color'] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  border: none;
+}
+
+[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+[type='color']::-webkit-color-swatch {
+  border: none;
+}
+
+.color-picker {
+  margin: 1px;
+  padding: 1px;
+}
+
+.fontcontrols fieldset {
+  margin: 0px auto 0px;
+  border: none;
+}
+
+fieldset {
+  border: none;
+  padding: 0px;
+  margin: 0px auto;
+}
+
+.cardMessageArea {
+  height: 300px;
 }

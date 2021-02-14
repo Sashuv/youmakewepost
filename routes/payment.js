@@ -4,32 +4,38 @@ var db = require('../database');
 
 /* POST payment page. */
 router.post('/:payment_id/', function(req, res, next) {
-  res.render('payment', {
-  	'success': true, 
-  	'payment_id': req.params.payment_id,
-  	'designParams': {
-	  	'assets_id': req.body.assets_id,
-	  	'assets_x': req.body.assets_x,
-	  	'assets_y': req.body.assets_y,
-	  	'assets_w': req.body.assets_w,
-	  	'assets_h': req.body.assets_h,
-	  	'assets_scale': req.body.assets_scale,
-	  	'assets_rotation': req.body.assets_rotation,
-	  	'canvasBackground': req.body.canvasBackground
-  	},
-  	'recieverFirstName': req.body.recieverFirstName,
-  	'recieverLastName': req.body.recieverLastName,
-  	'recieverAddress': req.body.recieverAddress,
-  	'recieverAddress2': req.body.recieverAddress2,
-  	'recieverCity': req.body.recieverCity,
-  	'recieverState': req.body.recieverState,
-  	'recieverZip': req.body.recieverZip,
-  	'textProp': {
-  		'font': req.body.messageFont,
-  		'fontSize': req.body.fontSize
-	},
-	'canvasMessage': req.body.canvasMessage,
-  });
+	console.log(req.body);
+	res.render('payment', {
+		'success': true, 
+		'payment_id': req.params.payment_id,
+		'designParams': {
+		  	'assets_id': [].concat(req.body.assets_id || []),
+		  	'assets_x': [].concat(req.body.assets_x || []),
+		  	'assets_y': [].concat(req.body.assets_y || []),
+		  	'assets_w': [].concat(req.body.assets_w || []),
+		  	'assets_h': [].concat(req.body.assets_h || []),
+		  	'assets_type': [].concat(req.body.assets_type || []),
+		  	'assets_font': [].concat(req.body.assets_font || []),
+		  	'assets_fontSize': [].concat(req.body.assets_fontSize || []),
+		  	'assets_color': [].concat(req.body.assets_color || []),
+		  	'assets_scale': [].concat(req.body.assets_scale || []),
+		  	'assets_rotation': [].concat(req.body.assets_rotation || []),
+		  	'canvasBackground': req.body.canvasBackground
+		},
+		'recieverFirstName': req.body.recieverFirstName,
+		'recieverLastName': req.body.recieverLastName,
+		'recieverAddress': req.body.recieverAddress,
+		'recieverAddress2': req.body.recieverAddress2,
+		'recieverCity': req.body.recieverCity,
+		'recieverState': req.body.recieverState,
+		'recieverZip': req.body.recieverZip,
+		'textProp': {
+			'font': req.body.cardMessageFont,
+			'fontSize': req.body.cardMessageFontSize,
+			'fontColor': req.body.cardMessageFontColor,
+		},
+		'canvasMessage': req.body.canvasMessage,
+	});
 });
 
 /* GET payment page. */

@@ -4,16 +4,12 @@ class CanvasUtils {
 		this.canvas = canvas;
 		this.ctx = canvas.getContext("2d");
 
-		this.images = [];
-		this.sel_image = -1;
+		this.data = [];
+		this.sel_data = -1;
 
 		this.background = null;
-		this.offset = null;
 		this.backgroundColor = "rgb(255, 255, 255)";
-
-		this.lines = [];
-
-		this.imageURL = "";
+		this.canvas_offset = null;
 	}
 
 	setBackgroundColor(color) {
@@ -21,10 +17,10 @@ class CanvasUtils {
 		this.updateCanvas();
 	}
 
-	deleteSelectedImage() {
-		if (this.sel_image < 0 || this.images[this.sel_image].bg == true) return;
-		this.images.splice(this.sel_image, 1);
-		this.sel_image = -1;
+	deleteSelectedData() {
+		if (this.sel_data < 0 || this.data[this.sel_data].bg == true) return;
+		this.data.splice(this.sel_data, 1);
+		this.sel_data = -1;
 		this.updateCanvas();
 	}
 
@@ -33,8 +29,9 @@ class CanvasUtils {
 		var self = this;
 		img.onload  = function () {
 			self.ctx.drawImage(img, 0, 0, self.canvas.width, self.canvas.height);
-			self.images.push({
-				'id': image_path,
+			self.data.push({
+				'content': image_path,
+				'type': 'img',
 				'img': img,
 				'x': 0,
 				'y': 0,
@@ -44,30 +41,48 @@ class CanvasUtils {
 				'rotate': 0,
 				'bg': true
 			});
-			self.updateCanvas(false);
+			self.updateCanvas();
 		}
 		img.src = image_path;
 		this.offset = offset;
 	}
 
 	rotateImage(left) {
-		if (this.sel_image < 0 || this.images[this.sel_image].bg == true) return;
+		if (this.sel_data < 0 || this.data[this.sel_data].type != 'img' || 
+			this.data[this.sel_data].bg == true) return;
 		let delta = 30;
 		if (left) {
 			delta = -30;
 		}
 
-		this.images[this.sel_image].rotate += delta;
+		this.data[this.sel_data].rotate += delta;
 		this.updateCanvas();
 	}
 
 	scaleImage(incr) {
-		if (this.sel_image < 0 || this.images[this.sel_image].bg == true) return;
-		let delta = -0.01;
-		if (incr) {
-			delta = 0.01;
+		if (this.sel_data < 0 ||
+			this.data[this.sel_data].bg == true) return;
+
+		if (this.data[this.sel_data].type == 'img') {
+			let delta = -0.01;
+			if (incr) {
+				delta = 0.01;
+			}
+			this.data[this.sel_data].scale += delta;
+		} else {
+			let delta = -1;
+			if (incr) delta = 1;
+
+			let sel_data = this.data[this.sel_data]
+			sel_data.fontSize += delta;
+
+			this.ctx.font = `${sel_data.fontSize}px ${sel_data.font}`;
+			let textWidth = this.ctx.measureText(sel_data.content).width;
+			let textHeight = this.ctx.measureText('M').width;
+
+			sel_data.w = textWidth;
+			sel_data.h = textHeight;
 		}
-		this.images[this.sel_image].scale += delta;
 		this.updateCanvas();
 	}
 
@@ -79,48 +94,68 @@ class CanvasUtils {
 		}
 
 		let bg_id = -1;
-		for (let i = 0; i < this.images.length; i++) {
-			if (this.sel_image == i) {
+		for (let i = 0; i < this.data.length; i++) {
+			// Draw the selected data later.
+			if (this.sel_data == i) {
 				continue;
 			}
 
-			if (this.images[i].bg == true) {
+			// Keep track of the background, so we can draw
+			// it later on.
+			if (this.data[i].bg == true) {
 				bg_id = i;
 				continue;
 			}
 
-			let image = this.images[i];
-			this.ctx.translate(image.x + (image.w * image.scale) / 2, 
-				image.y + (image.h * image.scale) / 2);
-			this.ctx.rotate(image.rotate * Math.PI / 180);
-			this.ctx.translate(-image.x - (image.w * image.scale) / 2, 
-				-image.y - (image.h * image.scale) / 2);
+			if (this.data[i].type == 'img') {
+				let image = this.data[i];
+				this.ctx.translate(image.x + (image.w * image.scale) / 2, 
+					image.y + (image.h * image.scale) / 2);
+				this.ctx.rotate(image.rotate * Math.PI / 180);
+				this.ctx.translate(-image.x - (image.w * image.scale) / 2, 
+					-image.y - (image.h * image.scale) / 2);
 
-			this.ctx.drawImage(image.img, image.x, image.y, 
-				image.w * image.scale, image.h * image.scale);
+				this.ctx.drawImage(image.img, image.x, image.y, 
+					image.w * image.scale, image.h * image.scale);
 
-			this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+				this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+			} else {
+				let text = this.data[i];
+				this.ctx.font = `${text.fontSize}px ${text.font}`;
+				this.ctx.fillStyle = text.color;
+				this.ctx.fillText(text.content, text.x, text.y);
+			}
 		}
 
 		if (bg_id != -1) {
-			this.ctx.drawImage(this.images[bg_id].img, this.images[bg_id].x, 
-				this.images[bg_id].y, this.images[bg_id].w, this.images[bg_id].h);
+			this.ctx.drawImage(this.data[bg_id].img, this.data[bg_id].x, 
+				this.data[bg_id].y, this.data[bg_id].w, this.data[bg_id].h);
 		}
 
-		if (this.sel_image >= 0) {
-			let image = this.images[this.sel_image];
-			this.ctx.translate(image.x + (image.w * image.scale) / 2, 
-				image.y + (image.h * image.scale) / 2);
-			this.ctx.rotate(image.rotate * Math.PI / 180);
-			this.ctx.translate(-image.x - (image.w * image.scale) / 2, 
-				-image.y - (image.h * image.scale) / 2);
+		if (this.sel_data >= 0) {
+			if (this.data[this.sel_data].type == 'img') {
+				let image = this.data[this.sel_data];
+				this.ctx.translate(image.x + (image.w * image.scale) / 2, 
+					image.y + (image.h * image.scale) / 2);
+				this.ctx.rotate(image.rotate * Math.PI / 180);
+				this.ctx.translate(-image.x - (image.w * image.scale) / 2, 
+					-image.y - (image.h * image.scale) / 2);
+				this.ctx.drawImage(image.img, image.x, image.y, 
+					image.w * image.scale, image.h * image.scale);
+				this.ctx.strokeStyle="rgba(120, 120, 120, 0.8)";
+				this.ctx.strokeRect(image.x, image.y, 
+					image.w * image.scale, image.h * image.scale);
+				this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+			} else {
+				let text = this.data[this.sel_data];
+				this.ctx.font = `${text.fontSize}px ${text.font}`;
+				this.ctx.fillStyle = text.color;
+				this.ctx.fillText(text.content, text.x, text.y);
 
-			this.ctx.drawImage(image.img, image.x, image.y, 
-				image.w * image.scale, image.h * image.scale);
-			this.ctx.strokeStyle="rgba(120, 120, 120, 0.8)";
-			this.ctx.strokeRect(image.x, image.y, 
-				image.w * image.scale, image.h * image.scale);
-			this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+				this.ctx.strokeStyle="rgba(120, 120, 120, 0.8)";
+				this.ctx.strokeRect(text.x - 5, text.y - text.h - 5, 
+					text.w + 10, text.h + 10);
+			}
 		}
 	}
 
@@ -138,83 +173,88 @@ class CanvasUtils {
 		this.ctx.fillText(`x: ${x}, y: ${y}`, 5, 395);
 	}
 
-	drawImage(image_path, scale) {
-		let img = new Image;
+	addImage(image_path) {
+		return new Promise((resolve, reject) => {
+			let img = new Image;
+			img.onload  = () => resolve(img);
+			img.onerror = reject;
+			img.src = image_path;
+		});
+	}
+
+	async drawImage(image_path, scale) {
 		var self = this;
-		img.onload  = function () {
-			self.ctx.drawImage(img, self.offset.x, self.offset.y, 
-				this.width * scale, this.height * scale);
-			self.images.push({
-				'id': image_path,
-				'img': img,
-				'x': self.offset.x,
-				'y': self.offset.y,
-				'w': this.width,
-				'h': this.height,
-				'scale': scale,
-				'rotate': 0,
-				'bg': false
-			});
-			self.sel_image = self.images.length - 1;
-			self.updateCanvas();
-
-		}
-		img.src = image_path;
+		let img = await this.addImage(image_path);
+		//self.ctx.drawImage(img, self.offset.x, self.offset.y, 
+		// 	img.width * scale, img.height * scale);
+		self.data.push({
+			'content': image_path,
+			'img': img,
+			'type': 'img',
+			'x': self.offset.x,
+			'y': self.offset.y,
+			'w': img.width,
+			'h': img.height,
+			'scale': scale,
+			'rotate': 0,
+			'bg': false
+		});
+		self.sel_data = self.data.length - 1;
+		self.updateCanvas();
 	}
 
-	drawImageWithData(image_path, x, y, w, h, scale, rotation) {
-		let img = new Image;
+	async drawImageWithData(image_path, x, y, w, h, scale, rotation) {
 		var self = this;
-		img.onload  = function () {
-			self.ctx.drawImage(img, x, y, w * scale, h * scale); 
-			self.images.push({
-				'id': image_path,
-				'img': img,
-				'x': x,
-				'y': y,
-				'w': w,
-				'h': h,
-				'scale': scale,
-				'rotate': rotation,
-				'bg': false
-			});
-		}
-		img.src = image_path;
-		this.sel_image = -1;
+		let img = await this.addImage(image_path);
+		self.ctx.drawImage(img, x, y, w * scale, h * scale); 
+		self.data.push({
+			'content': image_path,
+			'type': 'img',
+			'img': img,
+			'x': x,
+			'y': y,
+			'w': w,
+			'h': h,
+			'scale': scale,
+			'rotate': rotation,
+			'bg': false
+		});
+		this.sel_data = -1;
 	}
 
-	moveImage(idx, x, y) {
-		if (this.sel_image < 0 || this.images[this.sel_image].bg == true) return;
-		let r = this.canvas.getBoundingClientRect();
-		x = x - r.left; 
-		y = y - r.top;
-		let scale = this.images[idx].scale;
-		let w = this.images[idx].w * scale;
-		let h = this.images[idx].h * scale;
-		this.images[idx].x = x - (w / 2);
-		this.images[idx].y = y - (h / 2);
+	drawTextDefault(text, font, fontSize, fontColor) {
+		this.drawText(text, font, fontSize, fontColor, 
+			this.offset.x + (this.offset.w/2), 
+			this.offset.y + (this.offset.h/2));
 	}
 
-	selectImage(x, y) {
-		let r = this.canvas.getBoundingClientRect();
-		x = x - r.left; 
-		y = y - r.top;
-		for (let i = this.images.length - 1; i >=0; i--) {
-			if (this.images[i].bg == true) continue;
-			let image = this.images[i];
-			if (x > image.x && x < (image.x + image.w * image.scale) &&
-				y > image.y && y < (image.y + image.h * image.scale)) {
-				return i;
-			}
-		}
-		return -1;
+	drawText(text, font, fontSize, fontColor, x, y) {
+		this.ctx.font = `${fontSize}px ${font}`;
+		let textWidth = this.ctx.measureText(text).width;
+		let textHeight = this.ctx.measureText('M').width;
+
+		this.data.push({
+			'content': text,
+			'type': 'txt',
+			'fontSize': parseInt(fontSize),
+			'font': font,
+			'color': fontColor,
+			'x': x,
+			'y': y,
+			'w': textWidth,
+			'h': textHeight,
+			'bg': false
+		});
+		this.sel_data = this.data.length - 1;
+		this.updateCanvas();
 	}
 
-	drawText(myText, textProp, fit_text=true) {
+	drawFixedText(text, textProp, fit_text=true) {
 		this.ctx.fillStyle = this.backgroundColor;
 		this.ctx.fillRect(this.offset.x, this.offset.y, 
 			this.offset.w, this.offset.h);	
 
+		this.ctx.strokeStyle = textProp.fontColor;
 		this.ctx.font = `${textProp.fontSize}px ${textProp.font}`;
 		let offset = Object.create(this.offset);
 		let lineWidth = textProp.fontSize;
@@ -222,17 +262,62 @@ class CanvasUtils {
 		offset.x += 10;
 		offset.y += textProp.fontSize + 20;
 		if (fit_text) {
-			this.lines = this.fitText(myText, textProp, offset);
+			this.lines = this.fitText(text, textProp, offset);
 		} else {
-			this.lines = myText.split("<linebreak>");
-
-			this.ctx.fillStyle = "black";
+			this.lines = text.split("<linebreak>");
+			this.ctx.fillStyle = textProp.fontColor;
 			for (let i = 0; i < this.lines.length; i++) {
-				this.ctx.fillText(this.lines[i], offset.x, 
-					offset.y + (i * lineWidth));
+				this.drawText(this.lines[i], textProp.font, textProp.fontSize, 
+					textProp.fontColor, offset.x, offset.y + (i * lineWidth));
+			}
+			this.sel_data = -1;
+		}
+	}
+
+	moveData(idx, x, y) {
+		if (this.sel_data < 0 || this.data[this.sel_data].bg == true) return;
+		let r = this.canvas.getBoundingClientRect();
+		x = x - r.left; 
+		y = y - r.top;
+
+		
+		if (this.data[idx].type == 'img') {
+			let scale = this.data[idx].scale;
+			let w = this.data[idx].w * scale;
+			let h = this.data[idx].h * scale;
+			this.data[idx].x = x - (w / 2);
+			this.data[idx].y = y - (h / 2);
+		} else {
+			let w = this.data[idx].w;
+			let h = this.data[idx].h;
+			this.data[idx].x = x - (w / 2);
+			this.data[idx].y = y + (h / 2);
+		}
+	}
+
+	selectData(x, y) {
+		let r = this.canvas.getBoundingClientRect();
+		x = x - r.left; 
+		y = y - r.top;
+
+		for (let i = this.data.length - 1; i >=0; i--) {
+			if (this.data[i].bg == true) continue;
+			if (this.data[i].type == 'img') {
+				let image = this.data[i];
+				if (x > image.x && x < (image.x + image.w * this.data[i].scale) &&
+					y > image.y && y < (image.y + image.h * this.data[i].scale)) {
+					return i;
+				}
+			} else {
+				let text = this.data[i];
+				if (x > (text.x - 5) && x < (text.x + text.w + 10) &&
+					y < (text.y + 5) && y > (text.y - text.h - 10)) {
+					return i;
+				}
+
 			}
 		}
-		
+		return -1;
 	}
 
 	fitText(myText, textProp, offset) {
@@ -241,7 +326,7 @@ class CanvasUtils {
 		let lineWidth = textProp.fontSize;
 		let lines = [];
 		
-		this.ctx.fillStyle = "black";
+		this.ctx.fillStyle = textProp.fontColor;
 		for (let i = 0; i < myText.length; i++) {
 			if (myText[i] == '\n') {
 				this.ctx.fillText(lineText, offset.x, 

@@ -31,16 +31,17 @@ router.post('/savedb', function(req, res, next) {
   var recieverCity = req.body.recieverCity;
   var recieverState = req.body.recieverState;
   var recieverZip = req.body.recieverZip;
-  var cardFont = req.body.messageFont;
-  var fontSize = req.body.fontSize;
+  var cardMessageFont = req.body.cardMessageFont;
+  var cardMessageFontSize = req.body.cardMessageFontSize;
+  var cardMessageFontColor = req.body.cardMessageFontColor;
   var canvasBackground = req.body.canvasBackground;
   var canvasMessage = req.body.canvasMessage;
 
   var sql = "INSERT INTO MainTable (senderFirstName, senderLastName, senderAddress, senderAddress2, " +
             "senderCity, senderState, senderZip, recieverFirstName, recieverLastName, " +
             "recieverAddress, recieverAddress2, recieverCity, recieverState, recieverZip, " +
-            "canvasBackground, canvasMessage, cardFont, fontSize) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "canvasBackground, canvasMessage, cardMessageFont, cardMessageFontSize, cardMessageFontColor) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   db.query(sql, [senderFirstName,
       senderLastName,
@@ -58,19 +59,21 @@ router.post('/savedb', function(req, res, next) {
       recieverZip,
       canvasBackground,
       canvasMessage,
-      cardFont,
-      fontSize], function (error, results, fields) {
+      cardMessageFont,
+      cardMessageFontSize,
+      cardMessageFontColor], function (error, results, fields) {
   	if (error) throw error;
   	let insertId = results.insertId;
     let groupId = results.insertId % 2;
 
     if (typeof(req.body.assets_id) != "undefined") {
-      var subSql = "INSERT INTO UserAssets (main_id, image_id, x, y, w, h, scale, rotation, group_id) VALUES ";
+      var subSql = "INSERT INTO UserAssets (main_id, image_id, x, y, w, h, scale, rotation, " +
+                   "group_id, type, font, fontsize, fontColor) VALUES ";
       var subSqlParams = [];
 
       if (typeof(req.body.assets_id) != "string") {
         for (let i=0; i < req.body.assets_id.length; i++) {
-          subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+          subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
           if (i != req.body.assets_id.length - 1) {
             subSql += ", ";
           }
@@ -80,21 +83,53 @@ router.post('/savedb', function(req, res, next) {
           subSqlParams.push(parseInt(req.body.assets_y[i]));
           subSqlParams.push(parseInt(req.body.assets_w[i]));
           subSqlParams.push(parseInt(req.body.assets_h[i]));
-          subSqlParams.push(req.body.assets_scale[i]);
-          subSqlParams.push(req.body.assets_rotation[i]);
+          if (req.body.assets_type[i] == 'img') {
+            subSqlParams.push(req.body.assets_scale[i]);
+            subSqlParams.push(req.body.assets_rotation[i]);
+          } else {
+            subSqlParams.push(1);
+            subSqlParams.push(0);
+          }
           subSqlParams.push(groupId);
+
+          subSqlParams.push(req.body.assets_type[i]);
+          if (req.body.assets_type[i] == 'txt') {
+            subSqlParams.push(req.body.assets_font[i]);
+            subSqlParams.push(req.body.assets_fontSize[i]);
+            subSqlParams.push(req.body.assets_color[i]);
+          } else {
+            subSqlParams.push('');
+            subSqlParams.push(0);
+            subSqlParams.push('');
+          }
         }
       } else {
-        subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         subSqlParams.push(insertId);
         subSqlParams.push(req.body.assets_id);
         subSqlParams.push(parseInt(req.body.assets_x));
         subSqlParams.push(parseInt(req.body.assets_y));
         subSqlParams.push(parseInt(req.body.assets_w));
         subSqlParams.push(parseInt(req.body.assets_h));
-        subSqlParams.push(req.body.assets_scale);
-        subSqlParams.push(req.body.assets_rotation);
-        subSqlParams.push(groupId);
+        if (req.body.assets_type == 'img') {
+            subSqlParams.push(req.body.assets_scale);
+            subSqlParams.push(req.body.assets_rotation);
+          } else {
+            subSqlParams.push(1);
+            subSqlParams.push(0);
+          }
+          subSqlParams.push(groupId);
+
+          subSqlParams.push(req.body.assets_type);
+          if (req.body.assets_type[i] == 'txt') {
+            subSqlParams.push(req.body.assets_font);
+            subSqlParams.push(req.body.assets_fontSize);
+            subSqlParams.push(req.body.assets_color);
+          } else {
+            subSqlParams.push('');
+            subSqlParams.push(0);
+            subSqlParams.push('');
+          }
       }
 
       db.query(subSql, subSqlParams, function (error, results) {

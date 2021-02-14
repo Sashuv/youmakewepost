@@ -9,12 +9,17 @@
       <div data-id="step3" class="step-slider-item"></div>
     </div>
 
+    <!-- FORM AREA -->
     <form id="information-form" method="post" action="/preparation/savedb">
-    <!-- FORM AREA STARTS -->
+
+    <!-- STEP CONTENT -->
     <div class="step-content">
+      <!-- STEP ONE -->
       <div id="step1" class="step-content-body">
-        <h4>Step 1: Design the front of the card</h4> <hr/>
-        <div class="w3-half">
+        <h4>Step 1: Design the front of the card</h4><hr/>
+
+        <!-- STEP ONE CONTENT (1/2) -->
+        <div class="w3-half" style="margin-top:20px">
           <canvas id='front_page' width='400px' height='400px'>
             Canvas not supported in this browser.
           </canvas>
@@ -74,16 +79,66 @@
             </div>
 
             <div class="w3-quarter">
-              <i class="fa fa-trash w3-large" onclick="canvas_front.deleteSelectedImage();"></i><br/>
+              <i class="fa fa-trash w3-large" onclick="canvas_front.deleteSelectedData();"></i><br/>
               Delete
             </div>
           </div>
         </div>
+        <!-- STEP ONE CONTENT ENDS (1/2) -->
 
-        <div class="w3-half scroll-main">
-            <div id="d2" style="border: 1px solid grey;">
+
+
+        <!-- STEP ONE CONTENT (2/2) -->
+        <div class="w3-half">
+
+          <!-- CUSTOM TEXT BOX -->
+          <div class="sub-sub-header"> Add Cutom Text </div>
+          <div class="fontholder_div">
+            <div class="fontControls">
+              <fieldset>
+                <label for="frontCardFontSize"><i class="material-icons">format_size</i></label>
+                <input id='frontCardFontSize' name="frontCardFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
+                <select id='frontCardFont' name="frontCardFont">
+                  <option value="Arial" selected>Arial</option> 
+                  <option value="Raleway">Raleway</option>
+                  <option value="Montserrat">Montserrat</option>
+                  <option value="Raleway">Raleway</option>
+                  <option value="Titillium Web">Titillium Web</option>
+                  <option value="Pacifico">Pacifico</option>
+                  <option value="Josefin">Josefin</option>
+                  <option value="Orbitron">Orbitron</option>
+                  <option value="Comfortaa">Comfortaa</option>
+                  <option value="Courgette">Courgette</option>
+                  <option value="Ubuntu">Ubuntu</option>
+                  <option value="Chewy">Chewy</option>
+                  <option value="Lobster Two">Lobster Two</option>
+                  <option value="Kaushan Script">Kaushan Script</option>
+                  <option value="Economica">Economica</option>
+                  <option value="Satisfy">Satisfy</option>
+                </select>
+                <span class="color-picker">
+                  <label for="colorPicker"><i class="material-icons">format_color_text</i></label>
+                  <input type="color" id="colorPicker">
+                </span>
+              </fieldset>
+            </div>
+            <div class="frontCardMessageArea">
+              <textarea id="frontCardMessage" name='frontCardMessage' placeholder="Message" rows="2" style="width: 90%" ></textarea>
+            </div>
+
+            <button type="button" onclick="addText()">Add Text</button>
+          </div>
+          <!-- CUSTOM TEXT BOX END -->
+
+          <hr>
+
+          <!-- ASSETS BOX -->
+          <div class="scroll-main">
+            <div class="sub-sub-header"> Add Image Art </div>
+            <div class="scrollable_div">
               <input form="fakeForm" id="search-box" placeholder="Search images with keyword (e.g., new year)"></input>
-              <div id="d2i" style="padding-right: 20px;">
+
+              <div id="assets_holder" style="padding-right: 20px;">
                 <div class="w3-quarter" style="width:100px">
                   <img src="/images/assets/ballon.png" alt="Ballon">
                 </div>
@@ -167,27 +222,35 @@
                 <div class="w3-quarter" style="width:100px">
                   <img src="/images/assets/two-champange.png" alt="Two champange glasses">
                 </div>
+              </div>
             </div>
           </div>
+          <!-- ASSETS BOX END -->
         </div>
+        <!-- STEP ONE CONTENT (2/2) -->
       </div>
+      <!-- STEP ONE ENDS -->
+
+      <!-- STEP TWO -->
       <div id="step2" class="step-content-body out">
         <h4>Step 2: Compose message</h4><hr/>
+
+        <!-- STEP TWO CONTENT (1/2) -->
         <div class="w3-half">
           <canvas id='back_page' width='400px' height='400px' style='border: 1px solid;'>
             Canvas not supported in this browser.
           </canvas>
         </div>
-        <div class="w3-half">
+        <!-- STEP TWO CONTENT (1/2) ENDS -->
 
+        <!-- STEP TWO CONTENT (2/2) -->
+        <div class="w3-half">
+          <!--
           <label for="cardMessage">Message: </label>
           <textarea id='cardMessage' name='cardMessage' cols="40" rows="10" oninput="updateText()" placeholder="Type your message here."></textarea>
 
           <hr/>
-          
-          <label for="fontSize">Font Size: </label>
           <input id="fontSize" name="fontSize" type="number" value='14'/>
-
           <hr/>
 
           <div class="dropdown">
@@ -196,7 +259,6 @@
               Select Font
               <span class="caret"></span>
             </button>
-
             <ul class="dropdown-menu font-selection" aria-labelledby="fontList">
               <li style = "font-family: Raleway;"><a href="#">Raleway</a></li>
               <li style = "font-family: Montserrat"><a href="#">Montserrat</a></li>
@@ -214,8 +276,47 @@
               <li style = "font-family: Satisfy;"><a href="#">Satisfy</a></li>
             </ul>
           </div>
+          <hr/> -->
 
-          <hr/>
+          <!-- CUSTOM TEXT BOX -->
+          <div class="fontholder_div">
+            <div class="fontControls">
+              <fieldset>
+                <label for="cardMessageFontSize"><i class="material-icons">format_size</i></label>
+                <input id='cardMessageFontSize' name="cardMessageFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
+
+                <select id='cardMessageFont' name="cardMessageFont">
+                  <option value="Arial" selected>Arial</option> 
+                  <option value="Raleway">Raleway</option>
+                  <option value="Montserrat">Montserrat</option>
+                  <option value="Raleway">Raleway</option>
+                  <option value="Titillium Web">Titillium Web</option>
+                  <option value="Pacifico">Pacifico</option>
+                  <option value="Josefin">Josefin</option>
+                  <option value="Orbitron">Orbitron</option>
+                  <option value="Comfortaa">Comfortaa</option>
+                  <option value="Courgette">Courgette</option>
+                  <option value="Ubuntu">Ubuntu</option>
+                  <option value="Chewy">Chewy</option>
+                  <option value="Lobster Two">Lobster Two</option>
+                  <option value="Kaushan Script">Kaushan Script</option>
+                  <option value="Economica">Economica</option>
+                  <option value="Satisfy">Satisfy</option>
+                </select>
+
+                <span class="color-picker">
+                  <label for="cardMessageFontColor"><i class="material-icons">format_color_text</i></label>
+                  <input type="color" name="cardMessageFontColor" id="cardMessageColorPicker">
+                </span>
+              </fieldset>
+            </div>
+
+            <div class="cardMessageArea">
+              <textarea id="cardMessage" name='cardMessage' rows="5" oninput="updateText()" placeholder="Type your message here." style="width: 90%" ></textarea>
+            </div>
+          </div>
+          <!-- CUSTOM TEXT BOX END -->
+
         </div>
       </div>
       <div id="step3" class="step-content-body out">
@@ -312,13 +413,44 @@ var mousePress;
 var textProp = {
   'font': 'Arial',
   'fontSize': 14,
+  'fontColor': 'black',
 };
+
+$("#frontCardFontSize").change(function() {
+  $("#frontCardMessage").css("font-size", $(this).val() + "pt");
+});
+
+$("#colorPicker").change(function() {
+  $("#frontCardMessage").css("color", $(this).val());
+});
+
+$("#frontCardFont").change(function() {
+  $("#frontCardMessage").css("font-family", $(this).val());
+});
+
+$('#cardMessageFontSize').change(function() {
+  $("#cardMessage").css("font-size", $(this).val() + "pt");
+  textProp.fontSize = parseInt($('#cardMessageFontSize').val());
+  updateText();
+});
+
+$('#cardMessageFont').change(function() {
+  $("#cardMessage").css("font-family", $(this).val());
+  textProp.font = $(this).val();
+  updateText();
+})
+
+$("#cardMessageColorPicker").change(function() {
+  $("#cardMessage").css("color", $(this).val());
+  textProp.fontColor = $(this).val();
+  updateText();
+});
 
 function rotateImage() {
   canvas_front.rotateImage();
 }
 
-$(document).ready(function() {
+$(document).ready(async function() {
   let offset = {'x': 87, 'y': 50, 'w': 240, 'h': 310};
   canvas_front = new CanvasUtils(
     document.getElementById('front_page'));
@@ -330,13 +462,13 @@ $(document).ready(function() {
 
   canvas_front.canvas.onmousedown = function (e) {
     mousePress = true;
-    let idx = canvas_front.selectImage(e.clientX, e.clientY);
-    canvas_front.sel_image = idx;
+    let idx = canvas_front.selectData(e.clientX, e.clientY);
+    canvas_front.sel_data = idx;
     canvas_front.updateCanvas();
     canvas_front.canvas.onmousemove = function(e) {
       if (mousePress) {
         if (idx != -1) {
-          canvas_front.moveImage(idx, e.clientX, e.clientY);
+          canvas_front.moveData(idx, e.clientX, e.clientY);
           canvas_front.updateCanvas();
           canvas_front.writeCords(e.clientX, e.clientY);
         }
@@ -348,25 +480,12 @@ $(document).ready(function() {
     mousePress = false;
   }
 
-  
-  $('ul.font-selection li').on('click',function(){
-    textProp.font = $(this).css("font-family");
-    let caret = '<span class="caret"></span>';
-    $('#fontList').html(textProp.font + " " + caret);
-    updateText();
-  });
-
-  $('#fontSize').click(function() {
-    textProp.fontSize = parseInt($('#fontSize').val());
-    updateText();
-  });
-
   handleSteps();
 
   <% if (typeof designParams != "undefined") { %>
     var designParams = <%- JSON.stringify(designParams) %>
     for (let i = 0; i < designParams.length; i++) {
-      canvas_front.drawImageWithData(designParams[i].image_id, designParams[i].x, designParams[i].y, designParams[i].w, designParams[i].h, designParams[i].scale, designParams[i].rotation);
+      await canvas_front.drawImageWithData(designParams[i].image_id, designParams[i].x, designParams[i].y, designParams[i].w, designParams[i].h, designParams[i].scale, designParams[i].rotation);
     }
   <% } %>
 
@@ -381,14 +500,27 @@ $(document).ready(function() {
 });
 
 function updateText() {
-  let myText = document.getElementById("cardMessage").value;
-  canvas_back.drawText(myText, textProp);
+  let myText = $("#cardMessage").val();
+  canvas_back.drawFixedText(myText, textProp);
 }
 
-$('.scroll-main img').on('click', function() {
+$('.scroll-main img').on('click', async function() {
   let img_src = $(this).attr('src');
-  canvas_front.drawImage(img_src, 0.1);
-  // canvas_front.drawText()
+  console.log(img_src);
+  await canvas_front.drawImage(img_src, 0.1);
+});
+
+function addText() {
+  let message = $("#frontCardMessage").val();
+  let fontSize = $("#frontCardFontSize").val();
+  let fontFace = $("#frontCardFont").val();
+  let fontColor = $("#colorPicker").val();
+  canvas_front.drawTextDefault(message, fontFace, fontSize, fontColor);
+}
+
+$('.scroll-main #textInput').on('click', function() {
+  console.log("testing...");
+  
 });
 
 $('.color-box').on('click', function() {
@@ -413,7 +545,7 @@ $("#search-box").on('keypress', function(e) {
             `<img src="${res[i].path}">` +
             '</div>';
         }
-        $("#d2i").html(assets_html);
+        $("#assets_holder").html(assets_html);
 
         $('.scroll-main img').on('click', function() {
           let img_src = $(this).attr('src');
@@ -450,11 +582,11 @@ function handleSteps() {
   // Step Next
   $('.step-content .step-content-foot button[name="next"]').on('click', function() {
     if (step == 0) {
-      saveImageData(canvas_front.images);
+      saveImageData(canvas_front.data);
       saveCanvasBackground(canvas_front.backgroundColor);
       // saveCanvasData(canvas_front.canvas.toDataURL());
     } else if (step == 1) {
-      saveCanvasMessage(canvas_back.lines, textProp.font);
+      saveCanvasMessage(canvas_back.lines);
     }
 
     var instance = $(this);
