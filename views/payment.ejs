@@ -10,7 +10,7 @@
     </div>
     <div class="step-content">
       <div id="stepLast" class="step-content-body">
-        <h4>Step 4: Make the Payment</h4><hr/>
+        <div class="header">Step 4: Make the Payment</div><hr/>
           
         <div class="order-summary" style="margin-top:10px; overflow: auto;">
           <div class="sub-header"> Order Details </div>
@@ -31,16 +31,16 @@
           <!-- Delivery Address -->
           <div style="width:45%; float:right;">
             <div class="sub-sub-header">Delivery Address</div>
-            <div class="billing-details-content">  
+            <div class="wrapped-content pattern0">  
               <table style="text-align:left;">
               <tr>
-                <td>
+                <td class="sub-sub-sub-header">
                 <i class="material-icons">mail_outline</i> Recipient</td>
                 <td class="right-t"><%= recieverFirstName %> <%= recieverLastName %></td>
 
               </tr>
               <tr class="br-top">
-                <td>
+                <td class="sub-sub-sub-header">
                   <i class="material-icons">house</i> Address
                 </td>
                 <td class="right-t">
@@ -49,7 +49,7 @@
               </tr>
 
               <tr>
-                <td>
+                <td class="sub-sub-sub-header">
                   <i class="material-icons">house</i> Address 2
                 </td>
                 <td class="right-t">
@@ -58,7 +58,7 @@
               </tr>
 
               <tr>
-                <td>
+                <td class="sub-sub-sub-header">
                   <i class="material-icons">domain</i> City (Zip)
                 </td>
                 <td class="right-t">
@@ -67,7 +67,7 @@
               </tr>
 
               <tr>
-                <td>
+                <td class="sub-sub-sub-header">
                   <i class="material-icons">room</i> State
                 </td>
                 <td class="right-t">
@@ -78,23 +78,13 @@
               </table>
             </div>
           </div>
-          <!--
-          <div style='padding-left: 20px; float: right; width: 30%;'>
-            <div class="sub-sub-header">Delivery Address</div>
-            <div class="content" style="text-align:left; color: #1FAD9F; padding: 10px; line-height: 1.8;">
-              <%= recieverFirstName %> <%= recieverLastName %><br/>
-              <%= recieverAddress %>,<br/> 
-              <%= recieverAddress2 %><br/>
-              <%= recieverCity %>, <%= recieverState %>, <%= recieverZip %><br/>
-              United States
-            </div>
-          </div> -->
         </div>
 
         <hr/>
         
         <!-- Payment Div -->
         <div>
+          <div class="sub-header"> Payment Details </div>
           <!-- Paypal Buttons -->
           <div style="float:left; width:45%; margin-right: 5%;">
             <div class="sub-sub-header">Payment Options </div>
@@ -109,24 +99,24 @@
           <!-- Billing Details -->
           <div class="billing-details" style="width:45%; float:right;">
           <div class="sub-sub-header">Billing Details</div>
-            <div class="billing-details-content">
+            <div class="wrapped-content pattern1">
               <table style="text-align:left;">
               <tr>
-                <td>
+                <td class="sub-sub-sub-header">
                 <i class="material-icons">favorite</i> Custom Card</td>
                 <td class="right-t">$5</td>
 
               </tr>
               <tr>
-                <td><i class="material-icons">local_shipping</i> Shipping fee</td>
+                <td class="sub-sub-sub-header"><i class="material-icons">local_shipping</i> Shipping fee</td>
                 <td class="right-t">$1</td>
               </tr>
               <tr>
-                <td><i class="material-icons">money</i> Tax</td>
+                <td class="sub-sub-sub-header"><i class="material-icons">money</i> Tax</td>
                 <td class="right-t">$0.63</td>
               </tr>
               <tr class="br-top">
-                <td>Amount Payable</td>
+                <td class="sub-sub-sub-header">Amount Payable</td>
                 <td class="right-t">$6.63</td>
               </tr>
               </table>

@@ -123,9 +123,8 @@ button.disable {
   background-color: #ECEFF1;
 }
 
-.step-content .step-content-foot button.active {
-  background-color: #00ACC1;
-  color: white;
+.step-content {
+  overflow: auto;
 }
 
 .step-content .step-content-body {
@@ -136,6 +135,11 @@ button.disable {
 
 .step-content .step-content-body.out {
   display: none;
+}
+
+.step-content-foot button.active {
+  background-color: #00ACC1;
+  color: white;
 }
 
 .fontholder_div {
@@ -245,3 +249,17 @@ fieldset {
 .cardMessageArea {
   height: 300px;
 }
+
+.pattern0 {
+  padding: 20px; 
+  background: #e5e5e5;
+  border-radius: 20px 0px 20px 20px;
+}
+
+.pattern1 {
+  padding: 20px; 
+  margin-bottom: 10px;
+  background: #f5f5f5;
+  border-radius: 0px 20px 20px 20px;
+}
+

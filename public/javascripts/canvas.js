@@ -142,7 +142,7 @@ class CanvasUtils {
 					-image.y - (image.h * image.scale) / 2);
 				this.ctx.drawImage(image.img, image.x, image.y, 
 					image.w * image.scale, image.h * image.scale);
-				this.ctx.strokeStyle="rgba(120, 120, 120, 0.8)";
+				this.ctx.strokeStyle="rgba(0, 0, 0, 0.8)";
 				this.ctx.strokeRect(image.x, image.y, 
 					image.w * image.scale, image.h * image.scale);
 				this.ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -152,7 +152,7 @@ class CanvasUtils {
 				this.ctx.fillStyle = text.color;
 				this.ctx.fillText(text.content, text.x, text.y);
 
-				this.ctx.strokeStyle="rgba(120, 120, 120, 0.8)";
+				this.ctx.strokeStyle="rgba(0, 0, 0, 0.8)";
 				this.ctx.strokeRect(text.x - 5, text.y - text.h - 5, 
 					text.w + 10, text.h + 10);
 			}

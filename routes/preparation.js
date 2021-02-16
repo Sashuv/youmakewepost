@@ -7,7 +7,10 @@ router.get('/', function(req, res, next) {
 	if (req.query.design != null) {
 		var sql = `SELECT * FROM TemplateAssets WHERE template_id = ?`;
 		db.query(sql, [req.query.design], function (error, results, fields) {
-  		if (error) throw error;
+  		if (error) {
+        console.log(error);
+        throw error;
+      }
   		res.render('preparation', {'designParams': results});
   	});
 	} else {

@@ -16,14 +16,14 @@
     <div class="step-content">
       <!-- STEP ONE -->
       <div id="step1" class="step-content-body">
-        <h4>Step 1: Design the front of the card</h4><hr/>
+        <div class="header">Step 1: Design the front of the card</div><hr/>
 
         <!-- STEP ONE CONTENT (1/2) -->
-        <div class="w3-half" style="margin-top:20px">
+        <div class="w3-half" style="margin-top:50px">
           <canvas id='front_page' width='400px' height='400px'>
             Canvas not supported in this browser.
           </canvas>
-          <div class="button-group">
+          <div class="control-panel">
             <div class="w3-quarter">
               <div class="w3-half">
                 <i class="fa fa-rotate-right" style="font-size:24px" 
@@ -72,14 +72,13 @@
                     <td class='color-box' style="background: #a73c44;">
                     </td>
                   </tr>
-                  <!--<tr><td colspan="4">Background</td></tr>-->
                 </table>
               </center>
               <div style="margin-top:8px">Background</div>
             </div>
 
             <div class="w3-quarter">
-              <i class="fa fa-trash w3-large" onclick="canvas_front.deleteSelectedData();"></i><br/>
+              <i class="fa fa-trash w3-large" onclick="canvas_front.deleteSelectedData(); updateControls();"></i><br/>
               Delete
             </div>
           </div>
@@ -93,7 +92,7 @@
 
           <!-- CUSTOM TEXT BOX -->
           <div class="sub-sub-header"> Add Cutom Text </div>
-          <div class="fontholder_div">
+          <div class="fontholder_div pattern0">
             <div class="fontControls">
               <fieldset>
                 <label for="frontCardFontSize"><i class="material-icons">format_size</i></label>
@@ -233,7 +232,7 @@
 
       <!-- STEP TWO -->
       <div id="step2" class="step-content-body out">
-        <h4>Step 2: Compose message</h4><hr/>
+        <div class="header">Step 2: Compose message</div><hr/>
 
         <!-- STEP TWO CONTENT (1/2) -->
         <div class="w3-half">
@@ -244,39 +243,7 @@
         <!-- STEP TWO CONTENT (1/2) ENDS -->
 
         <!-- STEP TWO CONTENT (2/2) -->
-        <div class="w3-half">
-          <!--
-          <label for="cardMessage">Message: </label>
-          <textarea id='cardMessage' name='cardMessage' cols="40" rows="10" oninput="updateText()" placeholder="Type your message here."></textarea>
-
-          <hr/>
-          <input id="fontSize" name="fontSize" type="number" value='14'/>
-          <hr/>
-
-          <div class="dropdown">
-            <label for="fontList">Font Family: </label>
-            <button class="btn btn-default dropdown-toggle" type="button" id="fontList"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Select Font
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu font-selection" aria-labelledby="fontList">
-              <li style = "font-family: Raleway;"><a href="#">Raleway</a></li>
-              <li style = "font-family: Montserrat"><a href="#">Montserrat</a></li>
-              <li style = "font-family: Titillium Web"><a href="#">Titillium Web</a></li>
-              <li style = "font-family: Pacifico"><a href="#">Pacifico</a></li>
-              <li style = "font-family: Josefin Slab"><a href="#">Josefin Slab</a></li>
-              <li style = "font-family: Orbitron"><a href="#">Orbitron</a></li>
-              <li style = "font-family: Comfortaa;"><a href="#">Comfortaa</a></li>
-              <li style = "font-family: Courgette;"><a href="#">Courgette</a></li>
-              <li style = "font-family: Ubuntu;"><a href="#">Ubuntu</a></li>
-              <li style = "font-family: Chewy;"><a href="#">Chewy</a></li>
-              <li style = "font-family: Lobster Two;"><a href="#">Lobster Two</a></li>
-              <li style = "font-family: Kaushan Script;"><a href="#">Kaushan Script</a></li>
-              <li style = "font-family: Economica;"><a href="#">Economica</a></li>
-              <li style = "font-family: Satisfy;"><a href="#">Satisfy</a></li>
-            </ul>
-          </div>
-          <hr/> -->
+        <div class="w3-half pattern1">
 
           <!-- CUSTOM TEXT BOX -->
           <div class="fontholder_div">
@@ -319,11 +286,14 @@
 
         </div>
       </div>
+
+      <!-- STEP THREE -->
       <div id="step3" class="step-content-body out">
-        <h4>Step 3: Add Sender & Recipient Details</h4><hr/>
+        <div class="header">Step 3: Add Sender & Recipient Details</div><hr/>
         
-        <div class="w3-half" style="padding: 10px;background: #e5e5e5;">
-          <h4>Sender Details</h4>
+        <!-- SENDER DETAILS -->
+        <div class="w3-half pattern0">
+          <div class="sub-header">Sender Details</div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="senderFirstName">First Name</label>
@@ -347,19 +317,21 @@
               <label for="senderCity">City</label>
               <input type="text" class="form-control" id="senderCity" name="senderCity"  placeholder="e.g., Austin" required>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label for="senderState">State</label>
-              <input type="text" id="senderState" name="senderState" class="form-control" placeholder="e.g., TX" required>
+              <input type="text" id="senderState" name="senderState" maxlength="2" class="form-control" placeholder="e.g., TX" required>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
               <label for="senderZip">Zip</label>
               <input type="text" class="form-control" maxlength="5" id="senderZip" name="senderZip" required>
             </div>
           </div>          
         </div>
-          
-        <div class="w3-half" style="padding: 10px; background: #f5f5f5;">
-          <h4>Reciever Details</h4>
+        <!-- SENDER DETAILS END -->
+        
+        <!-- RECIEVER DETAILS -->  
+        <div class="w3-half pattern1">
+          <div class="sub-header">Reciever Details</div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="recieverFirstName">First Name</label>
@@ -383,17 +355,20 @@
               <label for="recieverCity">City</label>
               <input type="text" class="form-control" id="recieverCity" placeholder="e.g., Brooklyn" name="recieverCity" required>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label for="recieverState">State</label>
               <input type="text" id="recieverState" name="recieverState" class="form-control" placeholder="e.g., NY"  required>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
               <label for="recieverZip">Zip</label>
               <input type="text" class="form-control" id="recieverZip" maxlength="5" name="recieverZip" required>
             </div>
           </div>          
         </div>
+        <!-- SENDER DETAILS END -->
+
       </div>
+      <!-- STEP THREE ENDS -->
 
       <div class="step-content-foot">
         <button type="button" class="active" name="prev">Prev</button>
@@ -401,7 +376,10 @@
         <button type="submit" onsubmit="packageInfo()" class="active out" name="finish">Proceed to Payment</button>
       </div>
     </div>
+    <!-- STEP ENDS -->
+
     </form>
+
   </div>
 </div>
 
@@ -438,7 +416,7 @@ $('#cardMessageFont').change(function() {
   $("#cardMessage").css("font-family", $(this).val());
   textProp.font = $(this).val();
   updateText();
-})
+});
 
 $("#cardMessageColorPicker").change(function() {
   $("#cardMessage").css("color", $(this).val());
@@ -504,10 +482,29 @@ function updateText() {
   canvas_back.drawFixedText(myText, textProp);
 }
 
+function updateControls() {
+  let sel_index = canvas_front.sel_data;
+  if (sel_index != -1) {
+    if (canvas_front.data[sel_index].type == 'img') {
+      $(".control-panel i").css('cursor', 'pointer');
+    } else {
+      $(".control-panel i").css('cursor', 'pointer');
+      $(".control-panel .fa-rotate-right").css('cursor', 'not-allowed');
+      $(".control-panel .fa-rotate-left").css('cursor', 'not-allowed');
+    }
+  } else {
+    $(".control-panel i").css('cursor', 'not-allowed');
+  }
+}
+
+$('#front_page').on('click', function() {
+  updateControls();
+});
+
 $('.scroll-main img').on('click', async function() {
   let img_src = $(this).attr('src');
-  console.log(img_src);
   await canvas_front.drawImage(img_src, 0.1);
+  updateControls();
 });
 
 function addText() {
@@ -516,12 +513,8 @@ function addText() {
   let fontFace = $("#frontCardFont").val();
   let fontColor = $("#colorPicker").val();
   canvas_front.drawTextDefault(message, fontFace, fontSize, fontColor);
+  updateControls();
 }
-
-$('.scroll-main #textInput').on('click', function() {
-  console.log("testing...");
-  
-});
 
 $('.color-box').on('click', function() {
   let bg_color = $(this).css("backgroundColor");
