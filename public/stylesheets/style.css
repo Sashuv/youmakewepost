@@ -921,6 +921,7 @@ tr.br-top td.right-t {
   color: #000;
 }
 
+
 .sub-sub-sub-header {
   font-size: 14px;
   font-weight: 180;
@@ -963,4 +964,8 @@ div.vertical-line{
 
 .control-panel i {
   cursor: not-allowed;
+}
+
+#front_page {
+  border: 1px solid black;
 }
