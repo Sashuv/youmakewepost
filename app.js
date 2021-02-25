@@ -12,6 +12,7 @@ var helpRouter = require('./routes/howto');
 var contactRouter = require('./routes/contact');
 var aboutRouter = require('./routes/about');
 var trackerRouter = require('./routes/tracker')
+var imageRouter = require('./routes/image')
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/howto', helpRouter);
 app.use('/contact', contactRouter);
 app.use('/about', aboutRouter);
 app.use('/tracker', trackerRouter);
+app.use('/image', imageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

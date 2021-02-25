@@ -4,7 +4,6 @@ var db = require('../database');
 
 /* POST payment page. */
 router.post('/:payment_id/', function(req, res, next) {
-	console.log(req.body);
 	res.render('payment', {
 		'success': true, 
 		'payment_id': req.params.payment_id,

@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 		db.query(sql, [req.query.order], function (error, results, fields) {
 			if (error) throw error;
 			if (results.length == 0) {
-				msg['error'] = "Order number not found.";
+				msg['error'] = "Order not found.";
 			} else {
 				msg['error'] = "";
 				msg['order'] = results;

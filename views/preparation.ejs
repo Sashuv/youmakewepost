@@ -20,7 +20,7 @@
 
         <!-- STEP ONE CONTENT (1/2) -->
         <div class="w3-half" style="margin-top:50px">
-          <canvas id='front_page' width='400px' height='400px'>
+          <canvas id='front_page' width='350px' height='378px'>
             Canvas not supported in this browser.
           </canvas>
           <div class="control-panel">
@@ -73,7 +73,6 @@
                     </td>
                   </tr>
                 </table>
-              </center>
               <div style="margin-top:8px">Background</div>
             </div>
 
@@ -82,6 +81,7 @@
               Delete
             </div>
           </div>
+          </center>
         </div>
         <!-- STEP ONE CONTENT ENDS (1/2) -->
 
@@ -236,7 +236,7 @@
 
         <!-- STEP TWO CONTENT (1/2) -->
         <div class="w3-half">
-          <canvas id='back_page' width='400px' height='400px' style='border: 1px solid;'>
+          <canvas id='back_page' width='350px' height='378px' style='border: 1px solid;'>
             Canvas not supported in this browser.
           </canvas>
         </div>
@@ -429,8 +429,7 @@ function rotateImage() {
 }
 
 $(document).ready(async function() {
-  let offset = {'x': 87, 'y': 50, 'w': 240, 'h': 310};
-  // let offset = {'x': 0.2175, 'y': 0.125, 'w': 0.6, 'h': 0.775};
+  let offset = {'x': 77, 'y': 43, 'w': 210, 'h': 298};
   canvas_front = new CanvasUtils(
     document.getElementById('front_page'));
   canvas_front.setBackgroundImage('/images/cards/templates/card-layout.png', offset);

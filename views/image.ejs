@@ -1,0 +1,126 @@
+<%- include('header') -%>
+
+<style>
+canvas {
+  height: 400px;
+  float: center;
+}
+</style>
+
+<!-- 595 x 842 = 421 x 595 -->
+<!-- 794 x 1123 = 562 x 794 -->
+<!-- 2480 x 3508 = 1754 x 2480 -->
+
+<div>
+  <div class="w3-half">
+    <canvas id="front_card" width="1754" height="2480" style="border: 1px solid black;">
+    </canvas><br/>
+    <button onclick="download_front()">Download Front</button>
+  </div>
+
+  <div class="w3-half">
+    <canvas id="back_card" width="1754" height="2480" style="border: 1px solid black;">
+    </canvas><br/>
+    <button onclick="download_back()">Download Back</button>
+  </div>
+</div>
+
+
+
+
+<script>
+
+var canvas_front_utils;
+var canvas_back_utils;
+
+var download_front = function(){
+  var link = document.createElement('a');
+  link.download = 'front_card.png';
+  link.href = document.getElementById('front_card').toDataURL()
+  link.click();
+}
+
+var download_back = function(){
+  var link = document.createElement('a');
+  link.download = 'back_card.png';
+  link.href = document.getElementById('back_card').toDataURL()
+  link.click();
+}
+
+$(document).ready(async function() {
+  let canvas_front = document.getElementById('front_card');
+  canvas_front_utils = new CanvasUtils(canvas_front);
+
+  let canvas_back = document.getElementById('back_card');
+  canvas_back_utils = new CanvasUtils(canvas_back);
+
+  // Front Canvas
+  let old_offset = {'x': 77, 'y': 43, 'w': 210, 'h': 298};
+  let offset = {
+    'x': 0, 
+    'y': 0, 
+    'w': canvas_front.width, 
+    'h': canvas_front.height
+  };
+
+  canvas_front_utils.setBackgroundImage('', offset);
+  canvas_back_utils.setBackgroundImage('', offset);
+
+  let scale = offset.w/old_offset.w;
+
+  <% if (typeof designParams != "undefined") { %>
+    var params = <%- JSON.stringify(designParams) %>
+    for (let i = 0; i < params.length; i++) {
+      if (params[i].type == 'img') {
+        await canvas_front_utils.drawImageWithData(
+          params[i].content, 
+          (params[i].x - old_offset.x) * scale,
+          (params[i].y - old_offset.y) * scale, 
+          params[i].w,
+          params[i].h, 
+          (params[i].scale * scale), 
+          params[i].rotation
+        );
+      } else {
+        canvas_front_utils.drawText(
+          params[i].content, 
+          params[i].font,
+          params[i].fontSize * scale, 
+          params[i].fontColor, 
+          (params[i].x - old_offset.x) * scale,
+          (params[i].y - old_offset.y) * scale
+        );
+      }
+    }
+  <% } %>
+  canvas_front_utils.setBackgroundColor("rgb(255, 255, 255)");
+  canvas_back_utils.setBackgroundColor("rgb(255, 255, 255)");
+
+  <% if (typeof canvasParams != "undefined") { %>
+    var canvasParams = <%- JSON.stringify(canvasParams) %>
+    canvas_front_utils.setBackgroundColor(
+      canvasParams[0].canvasBackground);
+
+    canvas_back_utils.setBackgroundColor(
+      canvasParams[0].canvasBackground);
+
+    let textProp = {
+      'fontSize': canvasParams[0].cardMessageFontSize,
+      'font': canvasParams[0].cardMessageFont,
+      'fontColor': canvasParams[0].cardMessageFontColor,
+    };
+
+    textProp.fontSize = scale * textProp.fontSize;
+    let message = canvasParams[0].canvasMessage;
+    canvas_back_utils.drawFixedText(message, textProp, false);
+  <% } %>
+
+  canvas_front_utils.sel_data = -1;
+  canvas_front_utils.updateCanvas();
+  canvas_back_utils.updateCanvas();
+
+});
+
+</script>
+
+<%- include('footer') -%>

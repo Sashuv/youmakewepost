@@ -19,10 +19,10 @@
           <div style='padding-right: 20px; float: left; width:50%'>
             <div class="sub-sub-header"> Your Card (Front & Back) </div>
             <div class="w3-half" style='padding: 10px'>
-              <canvas id="design_canvas" width="200px" height="200px" style="border: 1px black solid;"></canvas>
+              <canvas id="design_canvas" width="175px" height="175px" style="border: 1px black solid;"></canvas>
             </div>
             <div class="w3-half"  style='padding: 10px'>
-              <canvas id="text_canvas" width="200px" height="200px" style="border: 1px black solid;"></canvas>
+              <canvas id="text_canvas" width="175px" height="175px" style="border: 1px black solid;"></canvas>
             </div>
           </div>
 
@@ -146,7 +146,7 @@
   </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AWF15HCa_O7IrJ2hIH1IhCDVeKV_lGUMLViQi18oebCDAXeVi4WKsmiGqn83KJUvbJQ0uTgIESV1qp47&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
 
 function loadOverlay() {
@@ -228,10 +228,20 @@ function initPayPalButton() {
       });
     },
 
+    onCancel: function() {
+      closeOverlay();
+      Alertpal.alert({
+        title: "Order Cancelled",
+        description: "There was an error processing your order. Please try again!"
+      });
+    },
+
     onError: function(err) {
       closeOverlay();
-      alert("There was an error processing your order.");
-      console.log(err);
+      Alertpal.alert({
+        title: "Order Failed",
+        description: "There was an error processing your order. Please try again!"
+      });
     }
   }).render('#paypal-button-container');
 }
@@ -253,7 +263,7 @@ $(document).ready(async function() {
   canvas_back_utils = new CanvasUtils(canvas_back);
 
   // Front Canvas
-  let offset = {'x': 43, 'y': 25, 'w': 120, 'h': 155};
+  let offset = {'x': 38, 'y': 21, 'w': 105, 'h': 149};
   canvas_front_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
   <% if (typeof designParams != "undefined") { %>
     var params = <%- JSON.stringify(designParams) %>
@@ -282,6 +292,7 @@ $(document).ready(async function() {
     message = "<%- canvasMessage %>";
   <% } %>
 
+  canvas_back_utils.setBackgroundColor(params.canvasBackground);
   canvas_back_utils.drawFixedText(message, textProp, false);
 });
 

@@ -259,8 +259,8 @@ class CanvasUtils {
 		let offset = Object.create(this.offset);
 		let lineWidth = textProp.fontSize;
 
-		offset.x += 10;
-		offset.y += textProp.fontSize + 20;
+		offset.x += (offset.w * 0.06);
+		offset.y += textProp.fontSize * 3;
 		if (fit_text) {
 			this.lines = this.fitText(text, textProp, offset);
 		} else {

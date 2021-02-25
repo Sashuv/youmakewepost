@@ -70,7 +70,7 @@ router.post('/savedb', function(req, res, next) {
     let groupId = results.insertId % 2;
 
     if (typeof(req.body.assets_id) != "undefined") {
-      var subSql = "INSERT INTO UserAssets (main_id, image_id, x, y, w, h, scale, rotation, " +
+      var subSql = "INSERT INTO UserAssets (main_id, content, x, y, w, h, scale, rotation, " +
                    "group_id, type, font, fontsize, fontColor) VALUES ";
       var subSqlParams = [];
 
