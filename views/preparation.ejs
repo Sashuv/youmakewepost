@@ -99,6 +99,17 @@
                 <input id='frontCardFontSize' name="frontCardFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
                 <select id='frontCardFont' name="frontCardFont">
                   <option value="Arial" selected>Arial</option> 
+                  <option value="Eczar">Eczar</option>
+                  <option value="Princess Sofia">Princess Sofia</option>
+                  <option value="Mountains of Christmas">Mountains of Christmas</option>
+                  <option value="Butterfly Kids">Butterfly Kids</option>
+                  <option value="Bubblegum Sans">Bubblegum Sans</option>
+                  <option value="Emilys Candy">Emilys Candy</option>
+                  <option value="Give You Glory">Give You Glory</option>
+                  <option value="Mystery Quest">Mystery Quest</option>
+                  <option value="Covered By Your Grace">Covered By Your Grace</option>
+                  <option value="Chela One Regular">Chela One Regular</option>
+                  <option value="Bonbon">Bonbon</option>
                   <option value="Raleway">Raleway</option>
                   <option value="Montserrat">Montserrat</option>
                   <option value="Raleway">Raleway</option>
@@ -114,10 +125,24 @@
                   <option value="Kaushan Script">Kaushan Script</option>
                   <option value="Economica">Economica</option>
                   <option value="Satisfy">Satisfy</option>
+                  <option value="Inter">Inter</option>
+                  <option value="Work Sans">Work Sans</option>
+                  <option value="Space Mono">Space Mono</option>
+                  <option value="Space Grotesk">Space Grotesk</option>
+                  <option value="Rubik">Rubik</option>
+                  <option value="Libre Franklin">Libre Franklin</option>
+                  <option value="Cormorant">Cormorant</option>
+                  <option value="Fira Sans">Fira Sans</option>
+                  <option value="Chivo">Chivo</option>
+
                 </select>
                 <span class="color-picker">
                   <label for="colorPicker"><i class="material-icons">format_color_text</i></label>
                   <input type="color" id="colorPicker">
+                </span>
+                <span class="font-styles">
+                  <i id="fontCard-bold-btn" class="material-icons">format_bold</i>
+                  <i id="fontCard-italic-btn" class="material-icons">format_italic</i>
                 </span>
               </fieldset>
             </div>
@@ -254,6 +279,17 @@
 
                 <select id='cardMessageFont' name="cardMessageFont">
                   <option value="Arial" selected>Arial</option> 
+                  <option value="Eczar">Eczar</option>
+                  <option value="Princess Sofia">Princess Sofia</option>
+                  <option value="Mountains of Christmas">Mountains of Christmas</option>
+                  <option value="Butterfly Kids">Butterfly Kids</option>
+                  <option value="Bubblegum Sans">Bubblegum Sans</option>
+                  <option value="Emilys Candy">Emilys Candy</option>
+                  <option value="Give You Glory">Give You Glory</option>
+                  <option value="Mystery Quest">Mystery Quest</option>
+                  <option value="Covered By Your Grace">Covered By Your Grace</option>
+                  <option value="Chela One Regular">Chela One Regular</option>
+                  <option value="Bonbon">Bonbon</option>
                   <option value="Raleway">Raleway</option>
                   <option value="Montserrat">Montserrat</option>
                   <option value="Raleway">Raleway</option>
@@ -269,12 +305,27 @@
                   <option value="Kaushan Script">Kaushan Script</option>
                   <option value="Economica">Economica</option>
                   <option value="Satisfy">Satisfy</option>
+                  <option value="Inter">Inter</option>
+                  <option value="Work Sans">Work Sans</option>
+                  <option value="Space Mono">Space Mono</option>
+                  <option value="Space Grotesk">Space Grotesk</option>
+                  <option value="Rubik">Rubik</option>
+                  <option value="Libre Franklin">Libre Franklin</option>
+                  <option value="Cormorant">Cormorant</option>
+                  <option value="Fira Sans">Fira Sans</option>
+                  <option value="Chivo">Chivo</option>
                 </select>
 
                 <span class="color-picker">
                   <label for="cardMessageFontColor"><i class="material-icons">format_color_text</i></label>
                   <input type="color" name="cardMessageFontColor" id="cardMessageColorPicker">
                 </span>
+
+                <span class="font-styles">
+                  <i id="backCard-bold-btn" class="material-icons">format_bold</i>
+                  <i id="backCard-italic-btn" class="material-icons">format_italic</i>
+                </span>
+
               </fieldset>
             </div>
 
@@ -392,6 +443,8 @@ var textProp = {
   'font': 'Arial',
   'fontSize': 14,
   'fontColor': 'black',
+  'fontStyle': 'normal',
+  'fontWeight': 'normal'
 };
 
 $("#frontCardFontSize").change(function() {
@@ -400,6 +453,52 @@ $("#frontCardFontSize").change(function() {
 
 $("#colorPicker").change(function() {
   $("#frontCardMessage").css("color", $(this).val());
+});
+
+$("#frontCard-bold-btn").click(function() {
+  if (!$(this).hasClass('selected')) {
+    $(this).addClass('selected');
+    $("#frontCardMessage").css("font-weight", 'bold');
+  } else {
+    $(this).removeClass('selected');
+    $("#frontCardMessage").css("font-weight", 'normal');
+  }
+});
+
+$("#frontCard-italic-btn").click(function() {
+  if (!$(this).hasClass('selected')) {
+    $(this).addClass('selected');
+    $("#frontCardMessage").css("font-style", 'italic');
+  } else {
+    $(this).removeClass('selected');
+    $("#frontCardMessage").css("font-style", 'normal');
+  }
+});
+
+$("#backCard-bold-btn").click(function() {
+  if (!$(this).hasClass('selected')) {
+    $(this).addClass('selected');
+    $("#cardMessage").css("font-weight", 'bold');
+    textProp.fontWeight = 'bold';
+  } else {
+    $(this).removeClass('selected');
+    $("#cardMessage").css("font-weight", 'normal');
+    textProp.fontWeight = 'normal';
+  }
+  updateText();
+});
+
+$("#backCard-italic-btn").click(function() {
+  if (!$(this).hasClass('selected')) {
+    $(this).addClass('selected');
+    $("#cardMessage").css("font-style", 'italic');
+    textProp.fontStyle = 'italic';
+  } else {
+    $(this).removeClass('selected');
+    $("#cardMessage").css("font-style", 'normal');
+    textProp.fontStyle = 'normal';
+  }
+  updateText();
 });
 
 $("#frontCardFont").change(function() {
@@ -512,7 +611,11 @@ function addText() {
   let fontSize = $("#frontCardFontSize").val();
   let fontFace = $("#frontCardFont").val();
   let fontColor = $("#colorPicker").val();
-  canvas_front.drawTextDefault(message, fontFace, fontSize, fontColor);
+
+  let fontStyle = $("#frontCardMessage").css("font-style");
+  let fontWeight = $("#frontCardMessage").css("font-weight");
+  canvas_front.drawTextDefault(message, fontFace, fontSize, fontColor,
+    fontStyle, fontWeight);
   updateControls();
 }
 

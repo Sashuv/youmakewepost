@@ -121,7 +121,7 @@ class CanvasUtils {
 				this.ctx.setTransform(1, 0, 0, 1, 0, 0);
 			} else {
 				let text = this.data[i];
-				this.ctx.font = `${text.fontSize}px ${text.font}`;
+				this.ctx.font = `${text.fontWeight} ${text.fontStyle} ${text.fontSize}px ${text.font}`;
 				this.ctx.fillStyle = text.color;
 				this.ctx.fillText(text.content, text.x, text.y);
 			}
@@ -148,7 +148,7 @@ class CanvasUtils {
 				this.ctx.setTransform(1, 0, 0, 1, 0, 0);
 			} else {
 				let text = this.data[this.sel_data];
-				this.ctx.font = `${text.fontSize}px ${text.font}`;
+				this.ctx.font = `${text.fontWeight} ${text.fontStyle} ${text.fontSize}px ${text.font}`;
 				this.ctx.fillStyle = text.color;
 				this.ctx.fillText(text.content, text.x, text.y);
 
@@ -222,14 +222,15 @@ class CanvasUtils {
 		this.sel_data = -1;
 	}
 
-	drawTextDefault(text, font, fontSize, fontColor) {
-		this.drawText(text, font, fontSize, fontColor, 
+	drawTextDefault(text, font, fontSize, fontColor, fontStyle='normal',
+		fontWeight='200') {
+		this.drawText(text, font, fontSize, fontColor, fontStyle, fontWeight,
 			this.offset.x + (this.offset.w/2), 
 			this.offset.y + (this.offset.h/2));
 	}
 
-	drawText(text, font, fontSize, fontColor, x, y) {
-		this.ctx.font = `${fontSize}px ${font}`;
+	drawText(text, font, fontSize, fontColor, fontStyle, fontWeight, x, y) {
+		this.ctx.font = `${fontWeight} ${fontStyle} ${fontSize}px ${font}`;
 		let textWidth = this.ctx.measureText(text).width;
 		let textHeight = this.ctx.measureText('M').width;
 
@@ -237,6 +238,8 @@ class CanvasUtils {
 			'content': text,
 			'type': 'txt',
 			'fontSize': parseInt(fontSize),
+			'fontStyle': fontStyle,
+			'fontWeight': fontWeight,
 			'font': font,
 			'color': fontColor,
 			'x': x,
@@ -255,12 +258,12 @@ class CanvasUtils {
 			this.offset.w, this.offset.h);	
 
 		this.ctx.strokeStyle = textProp.fontColor;
-		this.ctx.font = `${textProp.fontSize}px ${textProp.font}`;
+		this.ctx.font = `${textProp.fontWeight} ${textProp.fontStyle} ${textProp.fontSize}px ${textProp.font}`;
 		let offset = Object.create(this.offset);
-		let lineWidth = textProp.fontSize;
+		let lineWidth = 1.5 * textProp.fontSize ;
 
 		offset.x += (offset.w * 0.06);
-		offset.y += textProp.fontSize * 3;
+		offset.y += (offset.h * 0.15);
 		if (fit_text) {
 			this.lines = this.fitText(text, textProp, offset);
 		} else {
@@ -268,7 +271,7 @@ class CanvasUtils {
 			this.ctx.fillStyle = textProp.fontColor;
 			for (let i = 0; i < this.lines.length; i++) {
 				this.drawText(this.lines[i], textProp.font, textProp.fontSize, 
-					textProp.fontColor, offset.x, offset.y + (i * lineWidth));
+					textProp.fontColor, textProp.fontStyle, textProp.fontWeight, offset.x, offset.y + (i * lineWidth));
 			}
 			this.sel_data = -1;
 		}
@@ -279,7 +282,6 @@ class CanvasUtils {
 		let r = this.canvas.getBoundingClientRect();
 		x = x - r.left; 
 		y = y - r.top;
-
 		
 		if (this.data[idx].type == 'img') {
 			let scale = this.data[idx].scale;
@@ -323,7 +325,7 @@ class CanvasUtils {
 	fitText(myText, textProp, offset) {
 		let lineText = '';
 		let numLine = 0;
-		let lineWidth = textProp.fontSize;
+		let lineWidth = 1.5 * textProp.fontSize;
 		let lines = [];
 		
 		this.ctx.fillStyle = textProp.fontColor;

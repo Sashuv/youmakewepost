@@ -263,3 +263,12 @@ fieldset {
   border-radius: 0px 20px 20px 20px;
 }
 
+.font-styles {
+  padding-top: 2px;
+  font-size: 16pt;
+}
+
+.font-styles i.selected {
+  color: #000;
+}
+
