@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
 	if (req.query.user != null) {
 		var sql = "SELECT canvasBackground, canvasmessage, " + 
 			"canvasMessage, cardMessageFontSize, cardMessageFont, " + 
-			"cardMessageFontColor FROM MainTable WHERE id = ?";
+			"cardMessageFontColor, cardMessageFontStyle, cardMessageFontWeight " + 
+			"FROM MainTable WHERE id = ?";
 		db.query(sql, [req.query.user], function (error, canvasResults, fields) {
 			if (error) {
 			    console.log(error);
@@ -21,7 +22,6 @@ router.get('/', function(req, res, next) {
 					throw error;
 				}
 
-				console.log(canvasResults);
 				res.render('image', {
 					'designParams': templateResults,
 					'canvasParams': canvasResults

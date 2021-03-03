@@ -66,10 +66,10 @@ def get_concat_v(im1, im2):
     return dst
 
 
-image_cardMessage = Image.open('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/cardMessage.png')
-image_cardBack = Image.open('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/cardBack.png')
-image_cardFront = Image.open('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/cardFront.png')
+image_cardMessage = Image.open('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/back_card.png')
+image_cardBack = Image.open('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/back_card_default.png')
+image_cardFront = Image.open('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/front_card.png')
 image_empty = Image.open('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/empty.png')
 
-get_concat_h(image_cardBack, image_cardFront).save('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/front.png')
-get_concat_h(image_empty, image_cardMessage).save('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/back.png')
+get_concat_h(image_cardBack, image_cardFront).save('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/print_front.png')
+get_concat_h(image_empty, image_cardMessage).save('/Users/sushantkafle/Dropbox/Stuffs/dashain-card/heroku-app/youmakewepost/client/images/print_back.png')

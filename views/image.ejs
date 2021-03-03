@@ -87,6 +87,8 @@ $(document).ready(async function() {
           params[i].font,
           params[i].fontSize * scale, 
           params[i].fontColor, 
+          params[i].fontStyle,
+          params[i].fontWeight,
           (params[i].x - old_offset.x) * scale,
           (params[i].y - old_offset.y) * scale
         );
@@ -108,7 +110,11 @@ $(document).ready(async function() {
       'fontSize': canvasParams[0].cardMessageFontSize,
       'font': canvasParams[0].cardMessageFont,
       'fontColor': canvasParams[0].cardMessageFontColor,
+      'fontStyle': canvasParams[0].cardMessageFontStyle,
+      'fontWeight': canvasParams[0].cardMessageFontWeight
     };
+
+    console.log(textProp);
 
     textProp.fontSize = scale * textProp.fontSize;
     let message = canvasParams[0].canvasMessage;
