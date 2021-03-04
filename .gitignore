@@ -1,2 +1,7 @@
 
 client/*
+app.js
+routes/image.js
+views/image.ejs
+views/admin.ejs
+routes/admin.ejs
