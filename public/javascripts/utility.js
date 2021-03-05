@@ -28,12 +28,16 @@ function saveImageData(canvasData) {
 		let font = "";
 		let fontSize = 20;
 		let color = "Black";
+		let fontWeight = "";
+		let fontStyle = "";
 		if (canvasData[i].type == 'img') {
 			scale = canvasData[i].scale;
 			rotation = canvasData[i].rotate;	
 		} else {
 			font = canvasData[i].font;
 			fontSize = canvasData[i].fontSize;
+			fontStyle = canvasData[i].fontStyle;
+			fontWeight = canvasData[i].fontWeight;
 			color = canvasData[i].color;
 		}
 
@@ -45,6 +49,10 @@ function saveImageData(canvasData) {
 			`assets_font_${i}`));
 		$("#information-form").append(createHiddenInputClass(fontSize, "assets_fontSize", 
 			`assets_fontSize_${i}`));
+		$("#information-form").append(createHiddenInputClass(fontWeight, "assets_fontWeight", 
+			`assets_fontWeight_${i}`));
+		$("#information-form").append(createHiddenInputClass(fontStyle, "assets_fontStyle", 
+			`assets_fontStyle_${i}`));
 		$("#information-form").append(createHiddenInputClass(color, "assets_color", 
 			`assets_color_${i}`));
 	}

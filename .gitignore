@@ -1,7 +1,7 @@
 
-client/*
 app.js
-routes/image.js
-views/image.ejs
+.DS_Store
+*.DS_Store
+client/*
 views/admin.ejs
-routes/admin.ejs
+routes/admin.js

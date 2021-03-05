@@ -16,6 +16,8 @@ router.post('/:payment_id/', function(req, res, next) {
 		  	'assets_type': [].concat(req.body.assets_type || []),
 		  	'assets_font': [].concat(req.body.assets_font || []),
 		  	'assets_fontSize': [].concat(req.body.assets_fontSize || []),
+		  	'assets_fontStyle': [].concat(req.body.assets_fontStyle || []),
+		  	'assets_fontWeight': [].concat(req.body.assets_fontWeight || []),
 		  	'assets_color': [].concat(req.body.assets_color || []),
 		  	'assets_scale': [].concat(req.body.assets_scale || []),
 		  	'assets_rotation': [].concat(req.body.assets_rotation || []),
@@ -32,6 +34,8 @@ router.post('/:payment_id/', function(req, res, next) {
 			'font': req.body.cardMessageFont,
 			'fontSize': req.body.cardMessageFontSize,
 			'fontColor': req.body.cardMessageFontColor,
+			'fontStyle': req.body.cardMessageFontStyle,
+			'fontWeight': req.body.cardMessageFontWeight,
 		},
 		'canvasMessage': req.body.canvasMessage,
 	});

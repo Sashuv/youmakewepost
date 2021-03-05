@@ -19,10 +19,10 @@
           <div style='padding-right: 20px; float: left; width:50%'>
             <div class="sub-sub-header"> Your Card (Front & Back) </div>
             <div class="w3-half" style='padding: 10px'>
-              <canvas id="design_canvas" width="175px" height="175px" style="border: 1px black solid;"></canvas>
+              <canvas id="design_canvas" width="175px" height="189px" style="border: 1px black solid;"></canvas>
             </div>
             <div class="w3-half"  style='padding: 10px'>
-              <canvas id="text_canvas" width="175px" height="175px" style="border: 1px black solid;"></canvas>
+              <canvas id="text_canvas" width="175px" height="189px" style="border: 1px black solid;"></canvas>
             </div>
           </div>
 
@@ -274,8 +274,8 @@ $(document).ready(async function() {
         (params.assets_scale[i]/2), params.assets_rotation[i]);
       } else {
         canvas_front_utils.drawText(params.assets_id[i], params.assets_font[i],
-        params.assets_fontSize[i]/2, params.assets_color[i], params.assets_x[i]/2,
-        params.assets_y[i]/2);
+        params.assets_fontSize[i]/2, params.assets_color[i], params.assets_fontStyle[i],
+        params.assets_fontWeight[i], params.assets_x[i]/2, params.assets_y[i]/2);
       }
     }
     canvas_front_utils.setBackgroundColor(params.canvasBackground);

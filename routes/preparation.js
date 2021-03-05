@@ -37,14 +37,17 @@ router.post('/savedb', function(req, res, next) {
   var cardMessageFont = req.body.cardMessageFont;
   var cardMessageFontSize = req.body.cardMessageFontSize;
   var cardMessageFontColor = req.body.cardMessageFontColor;
+  var cardMessageFontStyle = req.body.cardMessageFontStyle;
+  var cardMessageFontWeight = req.body.cardMessageFontWeight;
   var canvasBackground = req.body.canvasBackground;
   var canvasMessage = req.body.canvasMessage;
 
   var sql = "INSERT INTO MainTable (senderFirstName, senderLastName, senderAddress, senderAddress2, " +
             "senderCity, senderState, senderZip, recieverFirstName, recieverLastName, " +
             "recieverAddress, recieverAddress2, recieverCity, recieverState, recieverZip, " +
-            "canvasBackground, canvasMessage, cardMessageFont, cardMessageFontSize, cardMessageFontColor) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "canvasBackground, canvasMessage, cardMessageFont, cardMessageFontSize, " +
+            "cardMessageFontWeight, cardMessageFontStyle, cardMessageFontColor) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   db.query(sql, [senderFirstName,
       senderLastName,
@@ -64,6 +67,8 @@ router.post('/savedb', function(req, res, next) {
       canvasMessage,
       cardMessageFont,
       cardMessageFontSize,
+      cardMessageFontWeight,
+      cardMessageFontStyle,
       cardMessageFontColor], function (error, results, fields) {
   	if (error) throw error;
   	let insertId = results.insertId;
@@ -71,12 +76,11 @@ router.post('/savedb', function(req, res, next) {
 
     if (typeof(req.body.assets_id) != "undefined") {
       var subSql = "INSERT INTO UserAssets (main_id, content, x, y, w, h, scale, rotation, " +
-                   "group_id, type, font, fontsize, fontColor) VALUES ";
+                   "group_id, type, font, fontsize, fontColor, fontWeight, fontStyle) VALUES ";
       var subSqlParams = [];
-
       if (typeof(req.body.assets_id) != "string") {
         for (let i=0; i < req.body.assets_id.length; i++) {
-          subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+          subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
           if (i != req.body.assets_id.length - 1) {
             subSql += ", ";
           }
@@ -100,14 +104,18 @@ router.post('/savedb', function(req, res, next) {
             subSqlParams.push(req.body.assets_font[i]);
             subSqlParams.push(req.body.assets_fontSize[i]);
             subSqlParams.push(req.body.assets_color[i]);
+            subSqlParams.push(req.body.assets_fontWeight[i]);
+            subSqlParams.push(req.body.assets_fontStyle[i]);
           } else {
             subSqlParams.push('');
             subSqlParams.push(0);
             subSqlParams.push('');
+            subSqlParams.push('');
+            subSqlParams.push('');
           }
         }
       } else {
-        subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        subSql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         subSqlParams.push(insertId);
         subSqlParams.push(req.body.assets_id);
         subSqlParams.push(parseInt(req.body.assets_x));
@@ -124,13 +132,17 @@ router.post('/savedb', function(req, res, next) {
           subSqlParams.push(groupId);
 
           subSqlParams.push(req.body.assets_type);
-          if (req.body.assets_type[i] == 'txt') {
+          if (req.body.assets_type == 'txt') {
             subSqlParams.push(req.body.assets_font);
             subSqlParams.push(req.body.assets_fontSize);
             subSqlParams.push(req.body.assets_color);
+            subSqlParams.push(req.body.assets_fontWeight);
+            subSqlParams.push(req.body.assets_fontStyle);
           } else {
             subSqlParams.push('');
             subSqlParams.push(0);
+            subSqlParams.push('');
+            subSqlParams.push('');
             subSqlParams.push('');
           }
       }

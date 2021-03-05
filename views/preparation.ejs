@@ -324,6 +324,8 @@
                 <span class="font-styles">
                   <i id="backCard-bold-btn" class="material-icons">format_bold</i>
                   <i id="backCard-italic-btn" class="material-icons">format_italic</i>
+                  <input id="cardMessageFontStyle" name="cardMessageFontStyle" value="normal" hidden />
+                  <input id="cardMessageFontWeight" name="cardMessageFontWeight" value="normal" hidden />
                 </span>
 
               </fieldset>
@@ -480,10 +482,12 @@ $("#backCard-bold-btn").click(function() {
     $(this).addClass('selected');
     $("#cardMessage").css("font-weight", 'bold');
     textProp.fontWeight = 'bold';
+    $("#cardMessageFontWeight").val('400');
   } else {
     $(this).removeClass('selected');
     $("#cardMessage").css("font-weight", 'normal');
     textProp.fontWeight = 'normal';
+    $("#cardMessageFontWeight").val('200');
   }
   updateText();
 });
@@ -493,10 +497,12 @@ $("#backCard-italic-btn").click(function() {
     $(this).addClass('selected');
     $("#cardMessage").css("font-style", 'italic');
     textProp.fontStyle = 'italic';
+    $("#cardMessageFontStyle").val('italic');
   } else {
     $(this).removeClass('selected');
     $("#cardMessage").css("font-style", 'normal');
     textProp.fontStyle = 'normal';
+    $("#cardMessageFontStyle").val('normal');
   }
   updateText();
 });
