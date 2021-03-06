@@ -63,8 +63,7 @@ router.post('/:payment_id/record/', function(req, res, next) {
 		[creationTime, transactionId, status, updateTime, paymentId, details],
 		function (error, results, fields) {
 			if (error) throw error;
-			let orderNumber = results.insertId;
-			res.json({'success': true, 'orderNumber': orderNumber});
+			res.json({'success': true, 'orderNumber': paymentId});
 		}
 	);
 });

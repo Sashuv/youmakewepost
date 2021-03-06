@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 			msg['message_type'] = 'error';
 		}
 
-		var sql = 'SELECT id, creation_time, status FROM Payments WHERE id = ?;';
+		var sql = 'SELECT id, creation_time, status FROM Payments WHERE user_id = ?;';
 		db.query(sql, [req.query.order], function (error, results, fields) {
 			if (error) throw error;
 			if (results.length == 0) {
