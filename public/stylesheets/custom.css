@@ -123,6 +123,10 @@ button.disable {
   background-color: #ECEFF1;
 }
 
+.step-content-body {
+  overflow: auto;
+}
+
 .step-content {
   overflow: auto;
 }

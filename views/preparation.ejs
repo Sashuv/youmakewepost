@@ -19,7 +19,7 @@
         <div class="header">Step 1: Design the front of the card</div><hr/>
 
         <!-- STEP ONE CONTENT (1/2) -->
-        <div class="w3-half" style="margin-top:50px">
+        <div class="w3-half">
           <canvas id='front_page' width='350px' height='378px'>
             Canvas not supported in this browser.
           </canvas>
@@ -89,85 +89,85 @@
 
         <!-- STEP ONE CONTENT (2/2) -->
         <div class="w3-half">
-
-          <!-- CUSTOM TEXT BOX -->
-          <div class="sub-sub-header">Add Cutom Text</div>
-          <div class="fontholder_div pattern0">
-            <div class="fontControls">
-              <fieldset>
-                <label for="frontCardFontSize"><i class="material-icons">format_size</i></label>
-                <input id='frontCardFontSize' name="frontCardFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
-                <select id='frontCardFont' name="frontCardFont">
-                  <option value="Arial" selected>Arial</option> 
-                  <option value="Eczar">Eczar</option>
-                  <option value="Princess Sofia">Princess Sofia</option>
-                  <option value="Mountains of Christmas">Mountains of Christmas</option>
-                  <option value="Butterfly Kids">Butterfly Kids</option>
-                  <option value="Bubblegum Sans">Bubblegum Sans</option>
-                  <option value="Emilys Candy">Emilys Candy</option>
-                  <option value="Give You Glory">Give You Glory</option>
-                  <option value="Mystery Quest">Mystery Quest</option>
-                  <option value="Covered By Your Grace">Covered By Your Grace</option>
-                  <option value="Chela One Regular">Chela One Regular</option>
-                  <option value="Bonbon">Bonbon</option>
-                  <option value="Raleway">Raleway</option>
-                  <option value="Montserrat">Montserrat</option>
-                  <option value="Raleway">Raleway</option>
-                  <option value="Titillium Web">Titillium Web</option>
-                  <option value="Pacifico">Pacifico</option>
-                  <option value="Josefin">Josefin</option>
-                  <option value="Orbitron">Orbitron</option>
-                  <option value="Comfortaa">Comfortaa</option>
-                  <option value="Courgette">Courgette</option>
-                  <option value="Ubuntu">Ubuntu</option>
-                  <option value="Chewy">Chewy</option>
-                  <option value="Lobster Two">Lobster Two</option>
-                  <option value="Kaushan Script">Kaushan Script</option>
-                  <option value="Economica">Economica</option>
-                  <option value="Satisfy">Satisfy</option>
-                  <option value="Inter">Inter</option>
-                  <option value="Work Sans">Work Sans</option>
-                  <option value="Space Mono">Space Mono</option>
-                  <option value="Space Grotesk">Space Grotesk</option>
-                  <option value="Rubik">Rubik</option>
-                  <option value="Libre Franklin">Libre Franklin</option>
-                  <option value="Cormorant">Cormorant</option>
-                  <option value="Fira Sans">Fira Sans</option>
-                  <option value="Chivo">Chivo</option>
-
-                </select>
-                <span class="color-picker">
-                  <label for="colorPicker"><i class="material-icons">format_color_text</i></label>
-                  <input type="color" id="colorPicker">
-                </span>
-                <span class="font-styles">
-                  <i id="frontCard-bold-btn" class="material-icons">format_bold</i>
-                  <i id="frontCard-italic-btn" class="material-icons">format_italic</i>
-                </span>
-              </fieldset>
-            </div>
-            <div class="frontCardMessageArea">
-              <textarea id="frontCardMessage" name='frontCardMessage' placeholder="Message" rows="2" style="width: 90%" ></textarea>
-            </div>
-
-            <button type="button" onclick="addText()">Add Text</button>
-          </div>
-          <!-- CUSTOM TEXT BOX END -->
-
-          <hr>
-
           <!-- ASSETS BOX -->
           <div class="scroll-main">
 
             <div class="tabset">
               <!-- Tab 1 -->
-              <input type="radio" name="tabset" id="tab1" aria-controls="upload-image" checked>
-              <label for="tab1" class="sub-sub-header">Upload Image</label>
+              <input type="radio" name="tabset" id="tab1" aria-controls="add-text" checked>
+              <label for="tab1" class="sub-sub-header">Add Text</label>
               <!-- Tab 2 -->
-              <input type="radio" name="tabset" id="tab2" aria-controls="image-art">
-              <label for="tab2" class="sub-sub-header">Add Image Art</label>
+              <input type="radio" name="tabset" id="tab2" aria-controls="upload-image">
+              <label for="tab2" class="sub-sub-header">Upload Image</label>
+              <!-- Tab 3 -->
+              <input type="radio" name="tabset" id="tab3" aria-controls="image-art">
+              <label for="tab3" class="sub-sub-header">Add Image Art</label>
               
               <div class="tab-panels">
+                <section id="add-text" class="tab-panel">
+                  <!-- CUSTOM TEXT BOX -->
+                  <div class="fontholder_div pattern0">
+                    <div class="fontControls">
+                      <fieldset>
+                        <label for="frontCardFontSize"><i class="material-icons">format_size</i></label>
+                        <input id='frontCardFontSize' name="frontCardFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
+                        <select id='frontCardFont' name="frontCardFont">
+                          <option value="Arial" selected>Arial</option> 
+                          <option value="Eczar">Eczar</option>
+                          <option value="Princess Sofia">Princess Sofia</option>
+                          <option value="Mountains of Christmas">Mountains of Christmas</option>
+                          <option value="Butterfly Kids">Butterfly Kids</option>
+                          <option value="Bubblegum Sans">Bubblegum Sans</option>
+                          <option value="Emilys Candy">Emilys Candy</option>
+                          <option value="Give You Glory">Give You Glory</option>
+                          <option value="Mystery Quest">Mystery Quest</option>
+                          <option value="Covered By Your Grace">Covered By Your Grace</option>
+                          <option value="Chela One Regular">Chela One Regular</option>
+                          <option value="Bonbon">Bonbon</option>
+                          <option value="Raleway">Raleway</option>
+                          <option value="Montserrat">Montserrat</option>
+                          <option value="Raleway">Raleway</option>
+                          <option value="Titillium Web">Titillium Web</option>
+                          <option value="Pacifico">Pacifico</option>
+                          <option value="Josefin">Josefin</option>
+                          <option value="Orbitron">Orbitron</option>
+                          <option value="Comfortaa">Comfortaa</option>
+                          <option value="Courgette">Courgette</option>
+                          <option value="Ubuntu">Ubuntu</option>
+                          <option value="Chewy">Chewy</option>
+                          <option value="Lobster Two">Lobster Two</option>
+                          <option value="Kaushan Script">Kaushan Script</option>
+                          <option value="Economica">Economica</option>
+                          <option value="Satisfy">Satisfy</option>
+                          <option value="Inter">Inter</option>
+                          <option value="Work Sans">Work Sans</option>
+                          <option value="Space Mono">Space Mono</option>
+                          <option value="Space Grotesk">Space Grotesk</option>
+                          <option value="Rubik">Rubik</option>
+                          <option value="Libre Franklin">Libre Franklin</option>
+                          <option value="Cormorant">Cormorant</option>
+                          <option value="Fira Sans">Fira Sans</option>
+                          <option value="Chivo">Chivo</option>
+
+                        </select>
+                        <span class="color-picker">
+                          <label for="colorPicker"><i class="material-icons">format_color_text</i></label>
+                          <input type="color" id="colorPicker">
+                        </span>
+                        <span class="font-styles">
+                          <i id="frontCard-bold-btn" class="material-icons">format_bold</i>
+                          <i id="frontCard-italic-btn" class="material-icons">format_italic</i>
+                        </span>
+                      </fieldset>
+                    </div>
+                    <div class="frontCardMessageArea">
+                      <textarea id="frontCardMessage" name='frontCardMessage' placeholder="Message" rows="2" style="width: 90%" ></textarea>
+                    </div>
+
+                    <button type="button" onclick="addText()">Add Text to Card</button>
+                  </div>
+                  <!-- CUSTOM TEXT BOX END -->
+                </section>
                 <section id="upload-image" class="tab-panel">
                   <div class="file-upload-wrapper">
                   <div class="control-group file-upload" id="file-uploader">
@@ -175,7 +175,7 @@
                       <span style="padding: 2em; border: 1px dotted black; overflow: auto;">Click to start uploading your image</span>
                       <img id="uploaded-img" src="" alt="" width="100px">
                       <div class="buttons">
-                        <button type="button" onclick="uploadImage(); return false;">Upload</button>
+                        <button type="button" onclick="uploadImage(); return false;">Add Image to Card</button>
                         <button type="button" onclick="clearUpload(); return false;">Clear</button>
                       </div>
                     </div>
@@ -186,7 +186,7 @@
                   </div>
                 </section>
                 <section id="image-art" class="tab-panel">
-                  <div class="sub-sub-header"> Add Image Art </div>
+                  <div class="sub-sub-header"> Click images to add them to the card. </div>
                   <div class="scrollable_div">
                     <input form="fakeForm" id="search-box" placeholder="Search images with keyword (e.g., new year)"></input>
 
