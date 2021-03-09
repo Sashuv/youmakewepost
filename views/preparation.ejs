@@ -158,94 +158,125 @@
 
           <!-- ASSETS BOX -->
           <div class="scroll-main">
-            <div class="sub-sub-header"> Add Image Art </div>
-            <div class="scrollable_div">
-              <input form="fakeForm" id="search-box" placeholder="Search images with keyword (e.g., new year)"></input>
 
-              <div id="assets_holder" style="padding-right: 20px;">
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/ballon.png" alt="Ballon">
-                </div>
+            <div class="tabset">
+              <!-- Tab 1 -->
+              <input type="radio" name="tabset" id="tab1" aria-controls="upload-image" checked>
+              <label for="tab1" class="sub-sub-header">Upload Image</label>
+              <!-- Tab 2 -->
+              <input type="radio" name="tabset" id="tab2" aria-controls="image-art">
+              <label for="tab2" class="sub-sub-header">Add Image Art</label>
+              
+              <div class="tab-panels">
+                <section id="upload-image" class="tab-panel">
+                  <div class="file-upload-wrapper">
+                  <div class="control-group file-upload" id="file-uploader">
+                    <div class="image-box text-center">
+                      <span style="padding: 2em; border: 1px dotted black; overflow: auto;">Click to start uploading your image</span>
+                      <img id="uploaded-img" src="" alt="" width="100px">
+                      <div class="buttons">
+                        <button type="button" onclick="uploadImage(); return false;">Upload</button>
+                        <button type="button" onclick="clearUpload(); return false;">Clear</button>
+                      </div>
+                    </div>
+                    <div class="controls" style="display: none;">
+                      <input type="file" accept=".jpg, .png, .jpeg" name="contact_image_1"/>
+                    </div>
+                    </div>
+                  </div>
+                </section>
+                <section id="image-art" class="tab-panel">
+                  <div class="sub-sub-header"> Add Image Art </div>
+                  <div class="scrollable_div">
+                    <input form="fakeForm" id="search-box" placeholder="Search images with keyword (e.g., new year)"></input>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/red-ribbon.png" alt="Red Ribbon">
-                </div>
+                    <div id="assets_holder" style="padding-right: 20px;">
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/ballon.png" alt="Ballon">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/ballon.png" alt="Ballon">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/red-ribbon.png" alt="Red Ribbon">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/star.png" alt="Star">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/ballon.png" alt="Ballon">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/banner-golden.png" alt="Banner Golden">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/star.png" alt="Star">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/champange.png" alt="Cahmpange">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/banner-golden.png" alt="Banner Golden">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/mistletoe-decoration.png" alt="Mistleteo Decoration">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/champange.png" alt="Cahmpange">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/mistletoe-branch.png" alt="Mistleteo Branch">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/mistletoe-decoration.png" alt="Mistleteo Decoration">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/mistletoe-close-up.png" alt="Mistleteo Closeup">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/mistletoe-branch.png" alt="Mistleteo Branch">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-gold.png" alt="New Year Golden">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/mistletoe-close-up.png" alt="Mistleteo Closeup">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-ballons-sticker.png" alt="New Year Ballons Sticker">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-gold.png" alt="New Year Golden">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-banner.png" alt="New Year banner">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-ballons-sticker.png" alt="New Year Ballons Sticker">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-curvey.png" alt="New Year Curvey">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-banner.png" alt="New Year banner">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-decor.png" alt="New Year Decor">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-curvey.png" alt="New Year Curvey">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-dog.png" alt="New Year Dog">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-decor.png" alt="New Year Decor">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-gold.png" alt="New Year Gold">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-dog.png" alt="New Year Dog">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-lights.png" alt="New Year Lights">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-gold.png" alt="New Year Gold">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-pink.png" alt="New Year Pink">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-lights.png" alt="New Year Lights">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-with-ballons.png" alt="New Year With Ballons">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-pink.png" alt="New Year Pink">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/new-year-with-fireworks.png" alt="New Year Fireworks">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-with-ballons.png" alt="New Year With Ballons">
+                      </div>
 
-                <div class="w3-quarter" style="width:100px">
-                  <img src="/images/assets/two-champange.png" alt="Two champange glasses">
-                </div>
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/new-year-with-fireworks.png" alt="New Year Fireworks">
+                      </div>
+
+                      <div class="w3-quarter" style="width:100px">
+                        <img src="/images/assets/two-champange.png" alt="Two champange glasses">
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
@@ -606,7 +637,7 @@ $('#front_page').on('click', function() {
   updateControls();
 });
 
-$('.scroll-main img').on('click', async function() {
+$('.scrollable_div img').on('click', async function() {
   let img_src = $(this).attr('src');
   await canvas_front.drawImage(img_src, 0.1);
   updateControls();

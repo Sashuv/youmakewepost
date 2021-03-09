@@ -100,3 +100,44 @@ $(function(){
 
 
 });
+
+function clearUpload(event) {
+	$(".image-box img").attr("src", "");
+	$(".image-box .buttons").css("visibility", "hidden");
+	$(".image-box span").show();
+	$(".image-box span").css('overflow', 'auto');
+	event.stopPropagation();
+}
+
+async function uploadImage(event) {
+	let img_src = $(".image-box img").attr("src");
+	await canvas_front.drawImage(img_src, 0.1);
+	updateControls();
+	event.stopPropagation();
+}
+
+
+$(".image-box span").on('click', function(event) {
+	var parent = $(this).parent();
+	var previewImg = parent.children("img");
+	parent
+		.siblings()
+		.children("input")
+		.trigger("click");
+	parent
+		.siblings()
+		.children("input")
+		.change(function() {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				var urll = e.target.result;
+				$(previewImg).attr("src", urll);
+				previewImg.parent().css("background", "transparent");
+				previewImg.show();
+				previewImg.siblings("span").hide();
+				previewImg.siblings(".buttons").css("visibility", "visible");
+			};
+			reader.readAsDataURL(this.files[0]);
+		});
+});
