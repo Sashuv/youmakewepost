@@ -52,7 +52,7 @@ router.get('/', function(req, res, next) {
 router.post('/:payment_id/record/', function(req, res, next) {
 	var creationTime = req.body.creation_time;
 	var transactionId = req.body.transaction_id;
-	var status = req.body.status;
+	var status = (req.body.status == "COMPLETED" ? "Payment Received (Verification Pending)" : "INCOMPLETE");
 	var updateTime = req.body.update_time;
 	var paymentId = req.body.payment_id;
 	var details = req.body.details;
@@ -63,7 +63,9 @@ router.post('/:payment_id/record/', function(req, res, next) {
 	db.query(sql, 
 		[creationTime, transactionId, status, updateTime, paymentId, details],
 		function (error, results, fields) {
-			if (error) throw error;
+			if (error) {
+				res.json({'success': false, 'orderNumber': paymentId});
+			}
 			res.json({'success': true, 'orderNumber': paymentId});
 		}
 	);
