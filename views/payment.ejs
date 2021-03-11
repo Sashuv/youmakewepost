@@ -267,6 +267,7 @@ $(document).ready(async function() {
   canvas_front_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
   <% if (typeof designParams != "undefined") { %>
     var params = <%- JSON.stringify(designParams) %>
+    console.log(params);
     for (let i = 0; i < params.assets_id.length; i++) {
       if (params.assets_type[i] == 'img') {
         await canvas_front_utils.drawImageWithData(params.assets_id[i], (params.assets_x[i])/2,

@@ -10,7 +10,8 @@
     </div>
 
     <!-- FORM AREA -->
-    <form id="information-form" method="post" action="/preparation/savedb">
+    <form id="main-form" method="post" action="/preparation/savedb">
+    </form>
 
     <!-- STEP CONTENT -->
     <div class="step-content">
@@ -110,8 +111,8 @@
                     <div class="fontControls">
                       <fieldset>
                         <label for="frontCardFontSize"><i class="material-icons">format_size</i></label>
-                        <input id='frontCardFontSize' name="frontCardFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
-                        <select id='frontCardFont' name="frontCardFont">
+                        <input form='main-form' id='frontCardFontSize' name="frontCardFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
+                        <select form='main-form' id='frontCardFont' name="frontCardFont">
                           <option value="Arial" selected>Arial</option> 
                           <option value="Eczar">Eczar</option>
                           <option value="Princess Sofia">Princess Sofia</option>
@@ -161,7 +162,7 @@
                       </fieldset>
                     </div>
                     <div class="frontCardMessageArea">
-                      <textarea id="frontCardMessage" name='frontCardMessage' placeholder="Message" rows="2" style="width: 90%" ></textarea>
+                      <textarea form='main-form' id="frontCardMessage" name='frontCardMessage' placeholder="Message" rows="2" style="width: 90%" ></textarea>
                     </div>
 
                     <button type="button" onclick="addText()">Add Text to Card</button>
@@ -169,21 +170,31 @@
                   <!-- CUSTOM TEXT BOX END -->
                 </section>
                 <section id="upload-image" class="tab-panel">
-                  <div class="file-upload-wrapper">
-                  <div class="control-group file-upload" id="file-uploader">
-                    <div class="image-box text-center">
-                      <span style="padding: 2em; border: 1px dotted black; overflow: auto;">Click to start uploading your image</span>
-                      <img id="uploaded-img" src="" alt="" width="100px">
-                      <div class="buttons">
-                        <button type="button" onclick="uploadImage(); return false;">Add Image to Card</button>
-                        <button type="button" onclick="clearUpload(); return false;">Clear</button>
+                  <!-- Upload  -->
+                  <form id="file-upload-form" action="/api/image" class="uploader">
+                    <input for="file-upload-form" id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+                    <label for="file-upload" id="file-drag">
+                      <img id="file-image" width="100px" src="#" alt="Preview" class="hidden">
+                      <div id="start">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        <div>Select a file or drag here</div>
+                        <div id="notimage" class="hidden">Please select an image</div>
+                        <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
                       </div>
-                    </div>
-                    <div class="controls" style="display: none;">
-                      <input type="file" accept=".jpg, .png, .jpeg" name="contact_image_1"/>
-                    </div>
-                    </div>
-                  </div>
+                      <div id="response" class="hidden">
+                        <div id="messages"></div>
+                        <progress class="progress" id="file-progress" value="0">
+                          <span>0</span>%
+                        </progress>
+
+                        <div class="button-group">
+                          <button id="add-image-to-card" type="button" onclick="uploadImage()">Add image to card</button>
+                          <button id="clear-upload" type="button" onclick="clearUpload()"> Restart </button>
+                        </div>
+                      </div>
+                    </label>
+                  </form>
                 </section>
                 <section id="image-art" class="tab-panel">
                   <div class="sub-sub-header"> Click images to add them to the card. </div>
@@ -306,9 +317,9 @@
             <div class="fontControls">
               <fieldset>
                 <label for="cardMessageFontSize"><i class="material-icons">format_size</i></label>
-                <input id='cardMessageFontSize' name="cardMessageFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
+                <input form='main-form' id='cardMessageFontSize' name="cardMessageFontSize" style="width:2.6em; height: 1.3em" type="number" value='14'/>
 
-                <select id='cardMessageFont' name="cardMessageFont">
+                <select form='main-form' id='cardMessageFont' name="cardMessageFont">
                   <option value="Arial" selected>Arial</option> 
                   <option value="Eczar">Eczar</option>
                   <option value="Princess Sofia">Princess Sofia</option>
@@ -349,21 +360,21 @@
 
                 <span class="color-picker">
                   <label for="cardMessageFontColor"><i class="material-icons">format_color_text</i></label>
-                  <input type="color" name="cardMessageFontColor" id="cardMessageColorPicker">
+                  <input form='main-form' type="color" name="cardMessageFontColor" id="cardMessageColorPicker">
                 </span>
 
                 <span class="font-styles">
                   <i id="backCard-bold-btn" class="material-icons">format_bold</i>
                   <i id="backCard-italic-btn" class="material-icons">format_italic</i>
-                  <input id="cardMessageFontStyle" name="cardMessageFontStyle" value="normal" hidden />
-                  <input id="cardMessageFontWeight" name="cardMessageFontWeight" value="normal" hidden />
+                  <input form='main-form' id="cardMessageFontStyle" name="cardMessageFontStyle" value="normal" hidden />
+                  <input form='main-form' id="cardMessageFontWeight" name="cardMessageFontWeight" value="normal" hidden />
                 </span>
 
               </fieldset>
             </div>
 
             <div class="cardMessageArea">
-              <textarea id="cardMessage" name='cardMessage' rows="5" oninput="updateText()" placeholder="Type your message here." style="width: 90%" ></textarea>
+              <textarea form='main-form' id="cardMessage" name='cardMessage' rows="5" oninput="updateText()" placeholder="Type your message here." style="width: 90%" ></textarea>
             </div>
           </div>
           <!-- CUSTOM TEXT BOX END -->
@@ -381,33 +392,33 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="senderFirstName">First Name</label>
-              <input type="text" class="form-control" name="senderFirstName" id="senderFirstName" placeholder="First Name" required>
+              <input form='main-form' type="text" class="form-control" name="senderFirstName" id="senderFirstName" placeholder="First Name" required>
             </div>
             <div class="form-group col-md-6">
               <label for="senderLastName">Last Name</label>
-              <input type="text" class="form-control" name="senderLastName" id="senderLastName" placeholder="Last Name" required>
+              <input form='main-form' type="text" class="form-control" name="senderLastName" id="senderLastName" placeholder="Last Name" required>
             </div>
           </div>
           <div class="form-group">
             <label for="senderAddress">Address</label>
-            <input type="text" class="form-control" name="senderAddress" id="senderAddress" placeholder="1234 Main St" required>
+            <input form='main-form' type="text" class="form-control" name="senderAddress" id="senderAddress" placeholder="1234 Main St" required>
           </div>
           <div class="form-group">
             <label for="senderAddress2">Address 2</label>
-            <input type="text" class="form-control" id="senderAddress2" name="senderAddress2" placeholder="Apartment, studio, or floor" required>
+            <input form='main-form' type="text" class="form-control" id="senderAddress2" name="senderAddress2" placeholder="Apartment, studio, or floor" required>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="senderCity">City</label>
-              <input type="text" class="form-control" id="senderCity" name="senderCity"  placeholder="e.g., Austin" required>
+              <input form='main-form' type="text" class="form-control" id="senderCity" name="senderCity"  placeholder="e.g., Austin" required>
             </div>
             <div class="form-group col-md-3">
               <label for="senderState">State</label>
-              <input type="text" id="senderState" name="senderState" maxlength="2" class="form-control" placeholder="e.g., TX" required>
+              <input form='main-form' type="text" id="senderState" name="senderState" maxlength="2" class="form-control" placeholder="e.g., TX" required>
             </div>
             <div class="form-group col-md-3">
               <label for="senderZip">Zip</label>
-              <input type="text" class="form-control" maxlength="5" id="senderZip" name="senderZip" required>
+              <input form='main-form' type="text" class="form-control" maxlength="5" id="senderZip" name="senderZip" required>
             </div>
           </div>          
         </div>
@@ -419,33 +430,33 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="recieverFirstName">First Name</label>
-              <input type="text" class="form-control" id="recieverFirstName" name="recieverFirstName" placeholder="First Name" required>
+              <input form='main-form' type="text" class="form-control" id="recieverFirstName" name="recieverFirstName" placeholder="First Name" required>
             </div>
             <div class="form-group col-md-6">
               <label for="recieverLastName">Last Name</label>
-              <input type="text" class="form-control" id="recieverLastName" name="recieverLastName" placeholder="Last Name" required>
+              <input form='main-form' type="text" class="form-control" id="recieverLastName" name="recieverLastName" placeholder="Last Name" required>
             </div>
           </div>
           <div class="form-group">
             <label for="recieverAddress">Address</label>
-            <input type="text" class="form-control" id="recieverAddress" name="recieverAddress" placeholder="1234 Main St" required>
+            <input form='main-form' type="text" class="form-control" id="recieverAddress" name="recieverAddress" placeholder="1234 Main St" required>
           </div>
           <div class="form-group">
             <label for="recieverAddress2">Address 2</label>
-            <input type="text" class="form-control" id="recieverAddress2" name="recieverAddress2" placeholder="Apartment, studio, or floor" required>
+            <input form='main-form' type="text" class="form-control" id="recieverAddress2" name="recieverAddress2" placeholder="Apartment, studio, or floor" required>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="recieverCity">City</label>
-              <input type="text" class="form-control" id="recieverCity" placeholder="e.g., Brooklyn" name="recieverCity" required>
+              <input form='main-form' type="text" class="form-control" id="recieverCity" placeholder="e.g., Brooklyn" name="recieverCity" required>
             </div>
             <div class="form-group col-md-3">
               <label for="recieverState">State</label>
-              <input type="text" id="recieverState" name="recieverState" class="form-control" placeholder="e.g., NY"  required>
+              <input form='main-form' type="text" id="recieverState" name="recieverState" class="form-control" placeholder="e.g., NY"  required>
             </div>
             <div class="form-group col-md-3">
               <label for="recieverZip">Zip</label>
-              <input type="text" class="form-control" id="recieverZip" maxlength="5" name="recieverZip" required>
+              <input form='main-form' type="text" class="form-control" id="recieverZip" maxlength="5" name="recieverZip" required>
             </div>
           </div>          
         </div>
@@ -457,7 +468,7 @@
       <div class="step-content-foot">
         <button type="button" class="active" name="prev">Prev</button>
         <button type="button" class="active" name="next">Next</button>
-        <button type="submit" onsubmit="packageInfo()" class="active out" name="finish">Proceed to Payment</button>
+        <button form='main-form' type="submit" onsubmit="packageInfo()" class="active out" name="finish">Proceed to Payment</button>
       </div>
     </div>
     <!-- STEP ENDS -->
@@ -769,6 +780,160 @@ function handleSteps() {
     }
   });
 }
+
+function clearUpload(event) {
+  $("#file-image").attr("src", "");
+  document.getElementById('file-image').classList.add("hidden");
+  document.getElementById('notimage').classList.remove("hidden");
+  document.getElementById('start').classList.remove("hidden");
+  document.getElementById('response').classList.add("hidden");
+  document.getElementById("file-upload-form").reset();
+  event.stopPropagation();
+}
+
+async function uploadImage(event) {
+  let img_src = $("#file-image").attr("src");
+  await canvas_front.drawImage(img_src, 0.1);
+  updateControls();
+  event.stopPropagation();
+}
+
+
+// File Upload
+// 
+function ekUpload(){
+  function Init() {
+
+    var fileSelect    = document.getElementById('file-upload'),
+        fileDrag      = document.getElementById('file-drag'),
+        submitButton  = document.getElementById('submit-button');
+
+    fileSelect.addEventListener('change', fileSelectHandler, false);
+
+    // Is XHR2 available?
+    var xhr = new XMLHttpRequest();
+    if (xhr.upload) {
+      // File Drop
+      fileDrag.addEventListener('dragover', fileDragHover, false);
+      fileDrag.addEventListener('dragleave', fileDragHover, false);
+      fileDrag.addEventListener('drop', fileSelectHandler, false);
+    }
+  }
+
+  function fileDragHover(e) {
+    var fileDrag = document.getElementById('file-drag');
+
+    e.stopPropagation();
+    e.preventDefault();
+
+    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
+  }
+
+  function fileSelectHandler(e) {
+    // Fetch FileList object
+    var files = e.target.files || e.dataTransfer.files;
+
+    // Cancel event and hover styling
+    fileDragHover(e);
+
+    parseFile(files[0]);
+    uploadFile(files[0]);
+  }
+
+  // Output
+  function output(msg) {
+    // Response
+    var m = document.getElementById('messages');
+    m.innerHTML = msg;
+  }
+
+  function parseFile(file) {
+    output(
+      '<strong>' + encodeURI(file.name) + '</strong>'
+    );
+    
+    var imageName = file.name;
+
+    var isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
+    if (isGood) {
+      document.getElementById('start').classList.add("hidden");
+      document.getElementById('response').classList.remove("hidden");
+      document.getElementById('notimage').classList.add("hidden");
+      // Thumbnail Preview
+      document.getElementById('file-image').classList.remove("hidden");
+      document.getElementById('file-image').src = "loading.gif";
+    }
+    else {
+      document.getElementById('file-image').classList.add("hidden");
+      document.getElementById('notimage').classList.remove("hidden");
+      document.getElementById('start').classList.remove("hidden");
+      document.getElementById('response').classList.add("hidden");
+      document.getElementById("file-upload-form").reset();
+    }
+  }
+
+  function setProgressMaxValue(e) {
+    var pBar = document.getElementById('file-progress');
+
+    if (e.lengthComputable) {
+      pBar.max = e.total;
+    }
+  }
+
+  function updateFileProgress(e) {
+    var pBar = document.getElementById('file-progress');
+
+    if (e.lengthComputable) {
+      pBar.value = e.loaded;
+    }
+  }
+
+  function uploadFile(file) {
+
+    var xhr = new XMLHttpRequest(),
+      fileInput = document.getElementById('class-roster-file'),
+      pBar = document.getElementById('file-progress'),
+      fileSizeLimit = 1024; // In MB
+    if (xhr.upload) {
+      // Check if file is less than x MB
+      if (file.size <= fileSizeLimit * 1024 * 1024) {
+        // Progress bar
+        pBar.style.display = 'inline';
+        xhr.upload.addEventListener('loadstart', setProgressMaxValue, false);
+        xhr.upload.addEventListener('progress', updateFileProgress, false);
+
+        // File received / failed
+        xhr.onreadystatechange = function(e) {
+          if (xhr.readyState == 4) {
+            // Everything is good!
+            if (xhr.status == 200) {
+              document.getElementById('file-image').src = "/" + xhr.responseText;
+            } else {
+              document.getElementById('file-image').src = "/error.png";
+              document.getElementById('add-image-to-card').classList.add("hidden");
+            }
+          }
+        };
+
+        // Start upload
+        xhr.open('POST', document.getElementById('file-upload-form').action, true);
+        const formData = new FormData();
+        formData.append('userImage', file);
+        xhr.send(formData);
+      } else {
+        output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+      }
+    }
+  }
+
+  // Check for the various File API support.
+  if (window.File && window.FileList && window.FileReader) {
+    Init();
+  } else {
+    document.getElementById('file-drag').style.display = 'none';
+  }
+}
+ekUpload();
 
 </script>
 

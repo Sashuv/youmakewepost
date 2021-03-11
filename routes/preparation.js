@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
 
 /* GET preparation page. */
 router.post('/savedb', function(req, res, next) {
+  console.log(req.body);
   var senderFirstName = req.body.senderFirstName;
   var senderLastName = req.body.senderLastName;
   var senderAddress = req.body.senderAddress;
