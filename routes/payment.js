@@ -4,7 +4,6 @@ var db = require('../database');
 
 /* POST payment page. */
 router.post('/:payment_id/', function(req, res, next) {
-	console.log(req.body);
 	res.render('payment', {
 		'success': true, 
 		'payment_id': req.params.payment_id,
@@ -53,15 +52,16 @@ router.post('/:payment_id/record/', function(req, res, next) {
 	var creationTime = req.body.creation_time;
 	var transactionId = req.body.transaction_id;
 	var status = (req.body.status == "COMPLETED" ? "Payment Received (Verification Pending)" : "INCOMPLETE");
+	var status_id = (req.body.status == "COMPLETED" ? 1 : 0);
 	var updateTime = req.body.update_time;
 	var paymentId = req.body.payment_id;
 	var details = req.body.details;
 
-	var sql = `INSERT INTO Payments (creation_time,  transaction_id, status, update_time, user_id, details) ` +
-			  `VALUES (?, ?, ?, ?, ?, ?)`;
+	var sql = `INSERT INTO Payments (creation_time,  transaction_id, status, update_time, user_id, details, status_id) ` +
+			  `VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
 	db.query(sql, 
-		[creationTime, transactionId, status, updateTime, paymentId, details],
+		[creationTime, transactionId, status, updateTime, paymentId, details, status_id],
 		function (error, results, fields) {
 			if (error) {
 				res.json({'success': false, 'orderNumber': paymentId});

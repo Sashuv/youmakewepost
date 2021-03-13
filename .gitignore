@@ -1,8 +1,10 @@
 .DS_Store
 *.DS_Store
+node_modules/*
 client/*
 views/admin.ejs
 routes/admin.js
 bin/local_www
 local-app.js
 start-local.sh
+.env

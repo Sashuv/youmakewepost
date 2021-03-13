@@ -177,6 +177,7 @@ class CanvasUtils {
 		return new Promise((resolve, reject) => {
 			let img = new Image;
 			img.onload  = () => resolve(img);
+			img.setAttribute('crossorigin', 'anonymous');
 			img.onerror = reject;
 			img.src = image_path;
 		});
