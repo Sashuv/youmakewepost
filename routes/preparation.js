@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
 
 /* GET preparation page. */
 router.post('/savedb', function(req, res, next) {
+  console.log(req.body); 
   var senderFirstName = req.body.senderFirstName;
   var senderLastName = req.body.senderLastName;
   var senderAddress = req.body.senderAddress;
@@ -41,13 +42,14 @@ router.post('/savedb', function(req, res, next) {
   var cardMessageFontWeight = req.body.cardMessageFontWeight;
   var canvasBackground = req.body.canvasBackground;
   var canvasMessage = req.body.canvasMessage;
+  var isSingleFormat = (req.body.singleFormat == "yes" ? 1 : 0);
 
   var sql = "INSERT INTO MainTable (senderFirstName, senderLastName, senderAddress, senderAddress2, " +
             "senderCity, senderState, senderZip, recieverFirstName, recieverLastName, " +
             "recieverAddress, recieverAddress2, recieverCity, recieverState, recieverZip, " +
             "canvasBackground, canvasMessage, cardMessageFont, cardMessageFontSize, " +
-            "cardMessageFontWeight, cardMessageFontStyle, cardMessageFontColor) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "cardMessageFontWeight, cardMessageFontStyle, cardMessageFontColor, singleFormat) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   db.query(sql, [senderFirstName,
       senderLastName,
@@ -69,7 +71,8 @@ router.post('/savedb', function(req, res, next) {
       cardMessageFontSize,
       cardMessageFontWeight,
       cardMessageFontStyle,
-      cardMessageFontColor], function (error, results, fields) {
+      cardMessageFontColor,
+      isSingleFormat], function (error, results, fields) {
   	if (error) throw error;
   	let insertId = results.insertId;
     let groupId = results.insertId % 2;

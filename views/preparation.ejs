@@ -311,6 +311,12 @@
 
         <!-- STEP TWO CONTENT (2/2) -->
         <div class="w3-half pattern1">
+          <fieldset>
+            <input form='main-form' type="checkbox" name="singleFormat" id="singleFormat" value="yes" />
+            <label for="singleFormat">I want a single page card</label>
+          </fieldset>
+
+          <hr/>
 
           <!-- CUSTOM TEXT BOX -->
           <div class="fontholder_div">
@@ -405,7 +411,7 @@
           </div>
           <div class="form-group">
             <label for="senderAddress2">Address 2</label>
-            <input form='main-form' type="text" class="form-control" id="senderAddress2" name="senderAddress2" placeholder="Apartment, studio, or floor" required>
+            <input form='main-form' type="text" class="form-control" id="senderAddress2" name="senderAddress2" placeholder="Apartment, studio, or floor">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -443,7 +449,7 @@
           </div>
           <div class="form-group">
             <label for="recieverAddress2">Address 2</label>
-            <input form='main-form' type="text" class="form-control" id="recieverAddress2" name="recieverAddress2" placeholder="Apartment, studio, or floor" required>
+            <input form='main-form' type="text" class="form-control" id="recieverAddress2" name="recieverAddress2" placeholder="Apartment, studio, or floor">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -490,6 +496,15 @@ var textProp = {
   'fontStyle': 'normal',
   'fontWeight': 'normal'
 };
+
+$("#singleFormat").change(function() {
+  console.log($("#singleFormat").is(':checked'));
+  if ($("#singleFormat").is(':checked')) {
+    $("#cardMessage").prop('disabled', true);
+  } else {
+    $("#cardMessage").prop('disabled', false);
+  }
+});
 
 $("#frontCardFontSize").change(function() {
   $("#frontCardMessage").css("font-size", $(this).val() + "pt");

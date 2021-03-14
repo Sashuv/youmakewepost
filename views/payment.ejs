@@ -16,15 +16,25 @@
           <div class="sub-header"> Order Details </div>
           
           <!-- Art Works -->
-          <div style='padding-right: 20px; float: left; width:50%'>
-            <div class="sub-sub-header"> Your Card (Front & Back) </div>
-            <div class="w3-half" style='padding: 10px'>
-              <canvas id="design_canvas" width="175px" height="189px" style="border: 1px black solid;"></canvas>
+
+          <%if (singleFormat == 0) {%>
+            <div style='padding-right: 20px; float: left; width:50%'>
+              <div class="sub-sub-header"> Your Card (Front & Back) </div>
+              <div class="w3-half" style='padding: 10px'>
+                <canvas id="design_canvas" width="175px" height="189px" style="border: 1px black solid;"></canvas>
+              </div>
+              <div class="w3-half"  style='padding: 10px'>
+                <canvas id="text_canvas" width="175px" height="189px" style="border: 1px black solid;"></canvas>
+              </div>
             </div>
-            <div class="w3-half"  style='padding: 10px'>
-              <canvas id="text_canvas" width="175px" height="189px" style="border: 1px black solid;"></canvas>
+          <% } else { %>
+            <div style='padding-right: 20px; float: left; width:50%'>
+              <div class="sub-sub-header"> Your Card </div>
+              <div style='padding: 10px'>
+                <canvas id="design_canvas" width="175px" height="189px" style="border: 1px black solid;"></canvas>
+              </div>
             </div>
-          </div>
+          <% } %>
 
           <div class="vertical-line" style="height: 200px"></div>
 
@@ -258,17 +268,13 @@ $(document).ready(async function() {
   }
   
   let canvas_front = document.getElementById('design_canvas');
-  let canvas_back = document.getElementById('text_canvas');
-
   canvas_front_utils = new CanvasUtils(canvas_front);
-  canvas_back_utils = new CanvasUtils(canvas_back);
 
   // Front Canvas
   let offset = {'x': 38, 'y': 21, 'w': 105, 'h': 149};
   canvas_front_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
   <% if (typeof designParams != "undefined") { %>
     var params = <%- JSON.stringify(designParams) %>
-    console.log(params);
     for (let i = 0; i < params.assets_id.length; i++) {
       if (params.assets_type[i] == 'img') {
         await canvas_front_utils.drawImageWithData(params.assets_id[i], (params.assets_x[i])/2,
@@ -285,17 +291,21 @@ $(document).ready(async function() {
     canvas_front_utils.updateCanvas();
   <% } %>
 
-  // Back Canvas
-  canvas_back_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
-  let textProp = <%- JSON.stringify(textProp) %>;
-  textProp.fontSize = 0.5 * textProp.fontSize;
-  let message = "";
-  <% if (typeof canvasMessage != "undefined") { %>
-    message = "<%- canvasMessage %>";
-  <% } %>
+  <% if (singleFormat == 0) { %>
+    // Back Canvas
+    let canvas_back = document.getElementById('text_canvas');
+    canvas_back_utils = new CanvasUtils(canvas_back);
+    canvas_back_utils.setBackgroundImage('/images/cards/templates/card-layout.png', offset);
+    let textProp = <%- JSON.stringify(textProp) %>;
+    textProp.fontSize = 0.5 * textProp.fontSize;
+    let message = "";
+    <% if (typeof canvasMessage != "undefined") { %>
+      message = "<%- canvasMessage %>";
+    <% } %>
 
-  canvas_back_utils.setBackgroundColor(params.canvasBackground);
-  canvas_back_utils.drawFixedText(message, textProp, false);
+    canvas_back_utils.setBackgroundColor(params.canvasBackground);
+    canvas_back_utils.drawFixedText(message, textProp, false);
+  <% } %>
 });
 
 </script>

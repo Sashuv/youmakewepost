@@ -38,6 +38,7 @@ router.post('/:payment_id/', function(req, res, next) {
 			'fontWeight': req.body.cardMessageFontWeight,
 		},
 		'canvasMessage': req.body.canvasMessage,
+		'singleFormat': req.body.singleFormat
 	});
 });
 
@@ -49,7 +50,6 @@ router.get('/', function(req, res, next) {
 
 /* POST payment record. */
 router.post('/:payment_id/record/', function(req, res, next) {
-	var creationTime = req.body.creation_time;
 	var transactionId = req.body.transaction_id;
 	var status = (req.body.status == "COMPLETED" ? "Payment Received (Verification Pending)" : "INCOMPLETE");
 	var status_id = (req.body.status == "COMPLETED" ? 1 : 0);
@@ -57,14 +57,14 @@ router.post('/:payment_id/record/', function(req, res, next) {
 	var paymentId = req.body.payment_id;
 	var details = req.body.details;
 
-	var sql = `INSERT INTO Payments (creation_time,  transaction_id, status, update_time, user_id, details, status_id) ` +
-			  `VALUES (?, ?, ?, ?, ?, ?, ?)`;
+	var sql = `INSERT INTO Payments (transaction_id, status, update_time, user_id, details, status_id) ` +
+			  `VALUES (?, ?, ?, ?, ?, ?)`;
 
 	db.query(sql, 
-		[creationTime, transactionId, status, updateTime, paymentId, details, status_id],
+		[transactionId, status, updateTime, paymentId, details, status_id],
 		function (error, results, fields) {
 			if (error) {
-				res.json({'success': false, 'orderNumber': paymentId});
+				res.status(400);
 			}
 			res.json({'success': true, 'orderNumber': paymentId});
 		}
