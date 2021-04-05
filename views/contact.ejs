@@ -1,10 +1,11 @@
 <%- include('header') -%>
 
+
 <form class="box-form">
   <h2 class="contact-header font-weight-bold display-4">Contact <span style="color: #1FAD9F">Us</span></h2>
-  <p class="contact-p" type="Name:"><input class="contact-input" placeholder="Write your name here.."></input></p>
-  <p class="contact-p" type="Email:"><input class="contact-input" placeholder="Let us know how to contact you back.."></input></p>
-  <p class="contact-p" type="Message:"><input class="contact-input" placeholder="What would you like to tell us.."></input></p>
+  <p class="contact-p" type="Name:"><input id="contact-name" name="contact-name" class="contact-input" placeholder="Write your name here.." required></input></p>
+  <p class="contact-p" type="Email:"><input id="contact-email" name="contact-email" class="contact-input" placeholder="Let us know how to contact you back.." required></input></p>
+  <p class="contact-p" type="Message:"><input id="contact-message" name="contact-message" class="contact-input" placeholder="What would you like to tell us.." required></input></p>
   <button class="contact-button">Send Message</button>
   <div class="contact-div">
     <!--<span class="contact-span fa fa-phone"></span>001 1023 567-->
@@ -12,7 +13,6 @@
   </div>
 </form>
 
-<script>
 $(document).ready(function() {
   let navBars = $(".probootstrap-nav li");
   for (let i = 0; i < navBars.length; i++) {
